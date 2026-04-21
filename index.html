@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shiva Krishna Donthi — Applied AI Engineer</title>
+  <meta name="description" content="Portfolio of Shiva Krishna Donthi — Applied AI Engineer, Agentic RAG Architect, Maritime SaaS, Hamburg." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">SKD<span class="accent">.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Available for conversations &amp; collaboration
+      </div>
+      <h1 class="hero-name">Shiva Krishna<br /><span class="gradient-text">Donthi</span></h1>
+      <p class="hero-title">Applied AI Engineer &middot; Agentic RAG Architect &middot; Maritime SaaS</p>
+      <p class="hero-tagline">
+        Building multi-agent AI systems that run in production —<br class="break-lg" />
+        aboard cruise ships, inside SaaS platforms, at sea.
+      </p>
+      <div class="hero-actions">
+        <a href="#experience" class="btn-primary">View Experience</a>
+        <a href="#blog" class="btn-ghost">Read Blog</a>
+      </div>
+      <div class="hero-meta">
+        <span>📍 Hamburg, Germany</span>
+        <span>10+ years engineering</span>
+        <span>Xcontrol GmbH</span>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">About</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 class="section-title">Senior engineer turned<br /><span class="gradient-text">agentic AI architect.</span></h2>
+          <p>10+ years building full-stack systems — now designing autonomous AI pipelines that reason, retrieve, and act without human intervention.</p>
+          <p>At Xcontrol I operate at the intersection of LLM orchestration and real-world maritime SaaS. I talk directly to cruise line customers, capture requirements onboard, and deploy AI systems where connectivity is sparse and reliability is critical.</p>
+          <p>I believe the best AI engineers get in the room with customers. The requirements you think you have are rarely the ones you need.</p>
+          <div class="about-langs">
+            <div class="lang-chip">English <span>Professional</span></div>
+            <div class="lang-chip">Telugu <span>Native</span></div>
+            <div class="lang-chip">Hindi <span>Native</span></div>
+            <div class="lang-chip">German <span>Working</span></div>
+          </div>
+        </div>
+        <div class="about-cards">
+          <div class="stat-card">
+            <span class="stat-num">10<span class="accent">+</span></span>
+            <span class="stat-label">Years Engineering</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">5<span class="accent">+</span></span>
+            <span class="stat-label">Years at Xcontrol</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">∞</span>
+            <span class="stat-label">Agent Loops Deployed</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">🚢</span>
+            <span class="stat-label">AI at Sea</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">Where I've <span class="gradient-text">built things.</span></h2>
+      <div class="timeline">
+
+        <div class="timeline-item current">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line"></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div>
+                <div class="card-role">Applied AI Engineer · SaaS RAG Architect</div>
+                <div class="card-company">Xcontrol GmbH</div>
+              </div>
+              <div class="card-meta">
+                <span class="badge-current">Current</span>
+                <span class="card-date">Mar 2025 – Present</span>
+              </div>
+            </div>
+            <div class="card-location">Hamburg, Germany</div>
+            <ul class="card-bullets">
+              <li>Built multi-agent orchestration pipelines using LangGraph + MCP — autonomous agents self-select tools, delegate subtasks, and recover from failures without human intervention.</li>
+              <li>Implemented ReAct + Plan-and-Execute agent loops coordinating RAG retrieval, live API calls, and knowledge graphs (Qdrant, Postgres vector store) in real time.</li>
+              <li>Designed agent memory via Redis Streams for cross-session continuity — agents retain context across conversations and adapt per-tenant without retraining.</li>
+              <li>Engaged directly with cruise line clients to elicit requirements, translate operational pain points into AI product specs, and validate prototypes against real-world workflows.</li>
+              <li>Deployed AI systems aboard cruise vessels — configured offline/sync modes and latency-tolerant inference for low-bandwidth maritime environments.</li>
+              <li>Onboarded shipboard IT teams: trained staff on system admin, incident triage, and escalation paths — enabling self-sufficient operations at sea.</li>
+              <li>Secured end-to-end pipelines via JWT/OIDC passthrough from Spring Boot identity services into distributed AI inference nodes.</li>
+            </ul>
+            <div class="card-tags">
+              <span>LangGraph</span><span>MCP</span><span>RAG</span><span>Qdrant</span><span>Redis</span><span>Kubernetes</span><span>JWT</span><span>Maritime SaaS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line"></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div>
+                <div class="card-role">Senior Software Development Engineer</div>
+                <div class="card-company">Xcontrol GmbH</div>
+              </div>
+              <div class="card-meta">
+                <span class="card-date">Aug 2021 – Sep 2025</span>
+              </div>
+            </div>
+            <div class="card-location">Hamburg, Germany</div>
+            <ul class="card-bullets">
+              <li>Led full-stack development of SaaS platform for maritime and cruise line clients — Angular frontend, Spring Boot backend, REST APIs.</li>
+              <li>Built interactive UIs for real-time vessel data, port logistics, and crew management dashboards.</li>
+              <li>Collaborated closely with product and operations teams to translate customer requirements into sprint-ready features.</li>
+            </ul>
+            <div class="card-tags">
+              <span>Angular</span><span>Spring Boot</span><span>PostgreSQL</span><span>REST APIs</span><span>Docker</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line"></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div>
+                <div class="card-role">Senior Software Engineer</div>
+                <div class="card-company">Aureus Tech Systems (Swiss Re)</div>
+              </div>
+              <div class="card-meta">
+                <span class="card-date">Dec 2020 – Jun 2021</span>
+              </div>
+            </div>
+            <div class="card-location">Hyderabad, India</div>
+            <ul class="card-bullets">
+              <li>Developed ERP system for Swiss Re incorporating KPIs and analytics on policies, claims, and renewals.</li>
+              <li>Built APIs in Spring Boot and highly interactive frontend in Angular + Highcharts.js.</li>
+              <li>Participated in business discussions, product roadmap, UX/UI reviews, and system design meetings.</li>
+            </ul>
+            <div class="card-tags">
+              <span>Spring Boot</span><span>Angular</span><span>Highcharts.js</span><span>Azure DevOps</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line"></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div>
+                <div class="card-role">Software Engineer</div>
+                <div class="card-company">ValueLabs</div>
+              </div>
+              <div class="card-meta">
+                <span class="card-date">May 2016 – Dec 2020</span>
+              </div>
+            </div>
+            <div class="card-location">Hyderabad, India</div>
+            <ul class="card-bullets">
+              <li>MEAN stack product development in Service Oriented Architecture using Agile methodology.</li>
+              <li>Developed SSO framework with JWT, core shared Angular modules, and REST APIs in Node.js.</li>
+              <li>Wrote API documentation in Confluence; led scrum ceremonies and agile process management.</li>
+            </ul>
+            <div class="card-tags">
+              <span>Angular</span><span>Node.js</span><span>MongoDB</span><span>JWT</span><span>SSO</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label">Skills</div>
+      <h2 class="section-title">What I <span class="gradient-text">build with.</span></h2>
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-icon">🤖</span>
+            <h3>Agentic AI</h3>
+          </div>
+          <div class="skill-tags">
+            <span>LangGraph</span><span>MCP</span><span>RAG</span><span>ReAct</span>
+            <span>Plan-and-Execute</span><span>LangChain</span><span>LLM Routing</span>
+            <span>Agentic Orchestration</span><span>Tool Calling</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-icon">🧠</span>
+            <h3>AI / ML</h3>
+          </div>
+          <div class="skill-tags">
+            <span>TensorFlow</span><span>Deep Learning</span><span>OpenCV</span>
+            <span>MediaPipe</span><span>Qdrant</span><span>Vector Search</span>
+            <span>Embedding Models</span><span>Knowledge Graphs</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-icon">⚙️</span>
+            <h3>Backend</h3>
+          </div>
+          <div class="skill-tags">
+            <span>Spring Boot</span><span>Node.js</span><span>Java</span>
+            <span>Python</span><span>PostgreSQL</span><span>Redis</span>
+            <span>Redis Streams</span><span>MySQL</span><span>REST APIs</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-icon">🎨</span>
+            <h3>Frontend</h3>
+          </div>
+          <div class="skill-tags">
+            <span>Angular</span><span>TypeScript</span><span>JavaScript</span>
+            <span>RxJS</span><span>Highcharts.js</span><span>HTML/CSS</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-icon">🚀</span>
+            <h3>DevOps &amp; Infra</h3>
+          </div>
+          <div class="skill-tags">
+            <span>Docker</span><span>Kubernetes</span><span>Docker Compose</span>
+            <span>K8s Operators</span><span>Azure</span><span>CI/CD</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-icon">🔐</span>
+            <h3>Architecture &amp; Security</h3>
+          </div>
+          <div class="skill-tags">
+            <span>Microservices</span><span>SOA</span><span>JWT</span>
+            <span>OIDC</span><span>SSO</span><span>Multi-tenant</span>
+            <span>System Design</span><span>Offline-First</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <span class="skill-icon">🚢</span>
+            <h3>Domain</h3>
+          </div>
+          <div class="skill-tags">
+            <span>Maritime SaaS</span><span>Cruise Tech</span><span>Requirements Engineering</span>
+            <span>Customer Discovery</span><span>Technical Onboarding</span>
+            <span>Stakeholder Management</span><span>Product Roadmap</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="container">
+      <div class="section-label">Blog</div>
+      <h2 class="section-title">Thoughts on <span class="gradient-text">building things.</span></h2>
+      <div class="blog-grid">
+
+        <article class="blog-card featured">
+          <div class="blog-card-inner">
+            <div class="blog-meta">
+              <span class="blog-tag">Maritime AI</span>
+              <span class="blog-read">5 min read</span>
+            </div>
+            <h3>AI Systems That Run at Sea</h3>
+            <p>Deploying LLM pipelines aboard cruise ships taught me things no cloud architecture blog ever will. Connectivity is a lie. Latency is religion. And your IT team is probably also the chef's assistant.</p>
+            <a href="blog/at-sea.html" class="blog-link">Read post <span>→</span></a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-card-inner">
+            <div class="blog-meta">
+              <span class="blog-tag">Product Engineering</span>
+              <span class="blog-read">4 min read</span>
+            </div>
+            <h3>Why AI Engineers Must Talk to Customers</h3>
+            <p>The requirements you think you have are rarely the ones you need. A framework for running discovery sessions that actually change what you build.</p>
+            <a href="blog/customer-discovery.html" class="blog-link">Read post <span>→</span></a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-card-inner">
+            <div class="blog-meta">
+              <span class="blog-tag">Career</span>
+              <span class="blog-read">6 min read</span>
+            </div>
+            <h3>From Full-Stack to Agentic AI: My Journey</h3>
+            <p>10 years of Angular, Spring Boot, and Node.js gave me a foundation. LangGraph, MCP, and a cruise ship gave me a mission. Here's how the transition happened.</p>
+            <a href="blog/journey.html" class="blog-link">Read post <span>→</span></a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-card-inner">
+            <div class="blog-meta">
+              <span class="blog-tag">Recommendations</span>
+              <span class="blog-read">2 min read</span>
+            </div>
+            <h3>What Colleagues Say</h3>
+            <p>Testimonials from Shivkumar Iyer (Xcontrol) and Kishore Geekuru (ValueLabs) on technical depth, delivery, and growth.</p>
+            <a href="blog/recommendations.html" class="blog-link">Read post <span>→</span></a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs">
+    <div class="container">
+      <div class="section-label">Certifications</div>
+      <h2 class="section-title">Always <span class="gradient-text">learning.</span></h2>
+      <div class="certs-grid">
+        <div class="cert-card">
+          <div class="cert-icon">🏥</div>
+          <div class="cert-info">
+            <div class="cert-title">AI in Healthcare</div>
+            <div class="cert-issuer">Udacity · Oct 2022</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🤖</div>
+          <div class="cert-info">
+            <div class="cert-title">Artificial Intelligence</div>
+            <div class="cert-issuer">TechLabs Hamburg · Sep 2022</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">💡</div>
+          <div class="cert-info">
+            <div class="cert-title">Entrepreneurship — Bridge Your Idea</div>
+            <div class="cert-issuer">Startup Bridge · Aug 2022</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🧬</div>
+          <div class="cert-info">
+            <div class="cert-title">AI &amp; Machine Learning</div>
+            <div class="cert-issuer">IIIT Hyderabad · Sep 2019</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-text">
+          <div class="section-label">Contact</div>
+          <h2 class="section-title">Let's <span class="gradient-text">talk.</span></h2>
+          <p>Open to conversations about agentic AI, maritime tech, SaaS product engineering, or just interesting problems.</p>
+          <div class="contact-links">
+            <a href="mailto:skdonthi@gmail.com" class="contact-link email">
+              <span class="contact-icon">✉️</span>
+              <span>skdonthi@gmail.com</span>
+            </a>
+            <a href="https://linkedin.com/in/skdonthi" target="_blank" rel="noopener" class="contact-link linkedin">
+              <span class="contact-icon">💼</span>
+              <span>linkedin.com/in/skdonthi</span>
+            </a>
+            <a href="https://github.com/Dsk14" target="_blank" rel="noopener" class="contact-link github">
+              <span class="contact-icon">🐙</span>
+              <span>github.com/Dsk14</span>
+            </a>
+          </div>
+        </div>
+        <div class="contact-cta">
+          <a href="mailto:skdonthi@gmail.com" class="btn-primary btn-large">Send me an email</a>
+          <p class="cta-sub">I reply within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-logo">SKD<span class="accent">.</span></span>
+      <span class="footer-copy">© 2025 Shiva Krishna Donthi · Hamburg</span>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/skdonthi" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Dsk14" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:skdonthi@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

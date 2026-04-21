@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Systems That Run at Sea — Shiva Krishna Donthi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">SKD<span class="accent">.</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#blog">Blog</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-page">
+    <div class="container">
+      <div class="blog-page-header">
+        <a href="../index.html#blog" class="blog-page-back">← Back to blog</a>
+        <div class="section-label">Maritime AI</div>
+        <h1 class="blog-page-title">AI Systems That Run at Sea</h1>
+        <div class="blog-page-meta">
+          <span>Shiva Krishna Donthi</span>
+          <span>·</span>
+          <span>5 min read</span>
+          <span>·</span>
+          <span>2025</span>
+        </div>
+      </div>
+
+      <article class="blog-page-body">
+        <p>Deploying LLM pipelines aboard cruise ships taught me things no cloud architecture blog ever will. Connectivity is a lie. Latency is religion. And your IT team is probably also helping manage the guest WiFi, the POS terminals, and someone's request about the pool bar.</p>
+
+        <p>This is what I learned building and deploying AI systems at sea with Xcontrol.</p>
+
+        <h2>The environment is nothing like the cloud</h2>
+
+        <p>In cloud-native architecture, you assume fast networks, reliable DNS, horizontal scaling on demand, and monitoring dashboards you can actually watch. None of that is guaranteed at sea.</p>
+
+        <p>Satellite bandwidth is shared, expensive, and deeply unpredictable. A vessel crossing the Atlantic might have excellent connectivity for hours, then drop to near-zero throughput in a busy shipping lane or during poor weather. Your AI pipeline — which happily does RAG lookups against a cloud vector store in staging — will start timing out. Your LLM API calls will fail. Your users will stare at a loading spinner.</p>
+
+        <p>The fix isn't clever retry logic. It's rethinking the architecture from the ground up.</p>
+
+        <h2>What we actually built</h2>
+
+        <h3>Offline-first agent design</h3>
+        <p>We built agents that operate in two modes: <strong>online</strong> (full RAG, live API calls, cloud LLM backends) and <strong>offline</strong> (local inference, cached knowledge, degraded-but-functional). The transition between modes happens automatically based on connectivity signals — and critically, users see a clear indicator of which mode they're in rather than silent failures.</p>
+
+        <h3>Sync queues for data continuity</h3>
+        <p>Any write operation — crew logs, operational records, agent memory updates — goes into a local sync queue first. When connectivity restores, items drain into the cloud in order. Redis Streams gave us exactly this pattern: durable, ordered, and resumable. We never lost a write even through multi-hour outages.</p>
+
+        <h3>Latency-tolerant inference</h3>
+        <p>At sea, a 3-second LLM response is fine. An 8-second response is a problem. We built aggressive caching at the retrieval layer — semantic caching of RAG results with TTLs tuned to the domain (operational procedures don't change mid-voyage; crew schedules might). We also moved some inference workloads to smaller, faster models that run locally when the latency budget was tight.</p>
+
+        <h2>Onboarding the onboard IT team</h2>
+
+        <p>This was harder than the technical work, honestly.</p>
+
+        <p>Shipboard IT staff are remarkable generalists. They manage everything from passenger-facing WiFi to bridge navigation systems to back-office ERP. They don't have time to become LLM experts. And when something breaks at 3am in the middle of the ocean, they need to triage it themselves — they can't always get Hamburg on the line.</p>
+
+        <p>We built runbooks designed for non-AI-specialists: plain-language decision trees, clear escalation paths, health-check dashboards that showed green/amber/red without requiring anyone to understand vector embeddings. We did remote onboarding sessions, created short video walkthroughs for the most common scenarios, and made sure every failure mode had an obvious recovery path.</p>
+
+        <blockquote>
+          <p>The best AI system for a constrained environment is one that fails gracefully, communicates clearly, and never requires a PhD to debug at 3am.</p>
+        </blockquote>
+
+        <h2>What this taught me about AI architecture</h2>
+
+        <ul>
+          <li>Resilience is not an afterthought. Design for failure from day one.</li>
+          <li>Offline-first forces you to think clearly about what data actually needs to be live vs. cached.</li>
+          <li>Users in high-stakes environments need clear system state communication — not spinner ambiguity.</li>
+          <li>The people who run your system day-to-day are your most important design constraint.</li>
+          <li>Maritime tech is one of the most underrated domains in software. Real constraints. Real stakes.</li>
+        </ul>
+
+        <p>If you're building AI for constrained environments — edge deployments, regulated industries, unreliable connectivity — I'd be happy to talk through what we learned. Reach out via <a href="mailto:skdonthi@gmail.com" style="color: var(--accent);">email</a> or <a href="https://linkedin.com/in/skdonthi" style="color: var(--accent);">LinkedIn</a>.</p>
+      </article>
+    </div>
+  </main>
+
+  <script src="../script.js"></script>
+</body>
+</html>

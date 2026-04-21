@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recommendations — Shiva Krishna Donthi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .rec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      margin-bottom: 24px;
+      transition: border-color var(--transition);
+    }
+    .rec-card:hover { border-color: var(--border-h); }
+    .rec-quote {
+      font-size: 1.05rem;
+      color: var(--text-1);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      font-style: italic;
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--accent);
+    }
+    .rec-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .rec-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .rec-name {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-1);
+    }
+    .rec-role { font-size: 0.82rem; color: var(--text-3); margin-top: 2px; }
+    .rec-company { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">SKD<span class="accent">.</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#blog">Blog</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-page">
+    <div class="container">
+      <div class="blog-page-header">
+        <a href="../index.html#blog" class="blog-page-back">← Back to blog</a>
+        <div class="section-label">Recommendations</div>
+        <h1 class="blog-page-title">What Colleagues Say</h1>
+        <div class="blog-page-meta">
+          <span>LinkedIn Recommendations</span>
+          <span>·</span>
+          <span>2 min read</span>
+        </div>
+      </div>
+
+      <div style="max-width: 680px;">
+
+        <div class="rec-card">
+          <p class="rec-quote">
+            "Shiva and I worked together at Xcontrol GmbH. From the beginning, he showed great ability to become familiar with the systems at Xcontrol. He was active in managing the Java Spring Boot backend and building REST APIs with very tight timelines on multiple projects. He also showed great skill with the Angular frontend, building several interactive UIs for many clients. He is passionate about software development — continuously gaining skills in ML and building full-stack apps with LLMs and AI agents. I would strongly recommend Shiva for any full-stack or AI engineer role at a senior level."
+          </p>
+          <div class="rec-author">
+            <div class="rec-avatar">SI</div>
+            <div>
+              <div class="rec-name">Shivkumar Iyer</div>
+              <div class="rec-role">Senior Engineer · <span class="rec-company">Xcontrol GmbH</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <p class="rec-quote">
+            "Shiva Krishna has proven to be a valuable member of our team. He joined us as a fresher and, within a short period, established himself as a key contributor by consistently delivering quality work. He is a quick learner and shows strong enthusiasm for exploring and adopting new technologies."
+          </p>
+          <div class="rec-author">
+            <div class="rec-avatar">KG</div>
+            <div>
+              <div class="rec-name">Kishore Geekuru</div>
+              <div class="rec-role">Engineering Lead · <span class="rec-company">ValueLabs</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-page-body" style="margin-top: 48px;">
+          <p>Want to add your own recommendation? We've worked together — I'd love to hear from you.</p>
+          <p>
+            <a href="https://linkedin.com/in/skdonthi" target="_blank" rel="noopener" style="color: var(--accent);">Leave a recommendation on LinkedIn →</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="../script.js"></script>
+</body>
+</html>
