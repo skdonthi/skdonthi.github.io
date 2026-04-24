@@ -486,6 +486,102 @@ img { max-width: 100%; display: block; }
   margin: 0;
 }
 
+.principle-card--open {
+  cursor: pointer;
+  border: 1px dashed rgba(79, 156, 249, 0.25);
+  background: rgba(79, 156, 249, 0.03);
+}
+.principle-card--open:hover {
+  border-color: rgba(79, 156, 249, 0.5);
+  background: rgba(79, 156, 249, 0.07);
+}
+.principle-card--open .principle-body h3 {
+  color: var(--accent);
+  opacity: 0.75;
+}
+.principle-card--open .principle-body p {
+  font-size: 0.84rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+.principle-card--open.is-editing {
+  cursor: default;
+  border-style: solid;
+  border-color: rgba(79, 156, 249, 0.4);
+  background: rgba(79, 156, 249, 0.05);
+}
+.principle-card--open.is-saved {
+  cursor: pointer;
+  border-style: solid;
+  border-color: rgba(79, 156, 249, 0.3);
+  background: var(--bg-card);
+}
+.principle-card--open.is-saved .principle-body h3 {
+  color: var(--text-1);
+  opacity: 1;
+}
+.principle-card--open.is-saved .principle-body p {
+  opacity: 1;
+  font-style: normal;
+}
+
+.open-principle-edit {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.open-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(79, 156, 249, 0.25);
+  border-radius: var(--radius-sm);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  padding: 10px 12px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  outline: none;
+  resize: none;
+  transition: border-color var(--transition);
+}
+.open-input:focus { border-color: var(--accent); }
+.open-input::placeholder { color: var(--text-3); }
+.open-input--title {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.open-principle-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.open-btn-save,
+.open-btn-cancel {
+  padding: 7px 18px;
+  border-radius: 50px;
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity var(--transition), transform var(--transition);
+}
+.open-btn-save {
+  background: var(--grad);
+  color: #fff;
+}
+.open-btn-save:hover { opacity: 0.88; transform: translateY(-1px); }
+.open-btn-cancel {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+.open-btn-cancel:hover { background: rgba(255,255,255,0.1); }
+
 @media (max-width: 768px) {
   .principles-grid { grid-template-columns: 1fr; }
   .principle-card { padding: 28px 24px; }

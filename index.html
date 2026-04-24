@@ -155,6 +155,35 @@
           </div>
         </div>
 
+        <div class="principle-card principle-card--open" id="open-principle" onclick="activateOpenPrinciple()">
+          <div class="principle-number">06</div>
+          <div class="principle-body" id="open-principle-body">
+            <h3 id="open-principle-title">Your Principle</h3>
+            <p id="open-principle-desc">What value matters most to your team? Click to add it — I'm here to adapt, grow, and build around what makes your organisation excellent.</p>
+            <div class="open-principle-edit" id="open-principle-edit" style="display:none;">
+              <input
+                id="open-principle-input-title"
+                class="open-input open-input--title"
+                maxlength="48"
+                placeholder="Principle name..."
+                onclick="event.stopPropagation()"
+              />
+              <textarea
+                id="open-principle-input-desc"
+                class="open-input open-input--desc"
+                maxlength="180"
+                rows="3"
+                placeholder="Describe what it means in practice..."
+                onclick="event.stopPropagation()"
+              ></textarea>
+              <div class="open-principle-actions">
+                <button class="open-btn-save" onclick="event.stopPropagation(); savePrinciple()">Save</button>
+                <button class="open-btn-cancel" onclick="event.stopPropagation(); cancelPrinciple()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
