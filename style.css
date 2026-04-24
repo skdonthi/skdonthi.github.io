@@ -490,6 +490,7 @@ img { max-width: 100%; display: block; }
   cursor: pointer;
   border: 1px dashed rgba(79, 156, 249, 0.25);
   background: rgba(79, 156, 249, 0.03);
+  border-bottom-right-radius: var(--radius-lg);
 }
 .principle-card--open:hover {
   border-color: rgba(79, 156, 249, 0.5);
