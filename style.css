@@ -419,6 +419,79 @@ img { max-width: 100%; display: block; }
 .stat-label { font-size: 0.82rem; color: var(--text-3); }
 
 /* ============================================================
+   PRINCIPLES
+   ============================================================ */
+#principles {
+  padding: 120px 0;
+  border-top: 1px solid var(--border);
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.principle-card {
+  display: flex;
+  gap: 24px;
+  padding: 36px 32px;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.principle-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grad-soft);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.principle-card:hover { background: var(--bg-card-h); }
+.principle-card:hover::before { opacity: 1; }
+
+.principle-number {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--accent);
+  opacity: 0.6;
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+
+.principle-body { position: relative; z-index: 1; }
+
+.principle-body h3 {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.principle-body p {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .principles-grid { grid-template-columns: 1fr; }
+  .principle-card { padding: 28px 24px; }
+}
+
+/* ============================================================
    EXPERIENCE / TIMELINE
    ============================================================ */
 #experience {
