@@ -29,7 +29,7 @@ document.querySelectorAll(
 ).forEach(el => observer.observe(el));
 
 // Open principle card
-function activateOpenPrinciple() {
+window.activateOpenPrinciple = function activateOpenPrinciple() {
   const card = document.getElementById('open-principle');
   if (card.classList.contains('is-editing')) return;
 
@@ -54,7 +54,7 @@ function activateOpenPrinciple() {
   inputTitle.focus();
 }
 
-function savePrinciple() {
+window.savePrinciple = function savePrinciple() {
   const card = document.getElementById('open-principle');
   const inputTitle = document.getElementById('open-principle-input-title');
   const inputDesc = document.getElementById('open-principle-input-desc');
@@ -81,7 +81,7 @@ function savePrinciple() {
   card.classList.add('is-saved');
 }
 
-function cancelPrinciple() {
+window.cancelPrinciple = function cancelPrinciple() {
   const card = document.getElementById('open-principle');
   const title = document.getElementById('open-principle-title');
   const desc = document.getElementById('open-principle-desc');
