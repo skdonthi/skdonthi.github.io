@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="sketch">
 
 <head>
   <meta charset="UTF-8" />
@@ -10,12 +10,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Patrick+Hand&family=Caveat:wght@500;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style-sketch.css" />
 </head>
 
 <body>
+
+  <!-- SVG filter defs for hand-drawn wobble -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="rough">
+        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3" />
+        <feDisplacementMap in="SourceGraphic" scale="3" />
+      </filter>
+      <filter id="rough-strong">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7" />
+        <feDisplacementMap in="SourceGraphic" scale="5" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Theme toggle (sketch ↔ clean) -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button"></button>
 
   <!-- NAV -->
   <nav id="navbar">
@@ -48,7 +66,7 @@
         Available for conversations &amp; collaboration
       </div>
       <h1 class="hero-name">Shiva Krishna<br /><span class="gradient-text">Donthi</span></h1>
-      <p class="hero-title">Applied AI Engineer &middot; Agentic RAG Architect &middot; Maritime SaaS</p>
+      <p class="hero-title">Applied AI Engineer &middot; Agentic Workflows &middot; Web Apps</p>
       <p class="hero-tagline">
         Building multi-agent Web apps and AI systems inside SaaS platforms.
       </p>
@@ -73,7 +91,7 @@
       <div class="section-label">About</div>
       <div class="about-grid">
         <div class="about-text">
-          <h2 class="section-title">Customer-first product engineer<br /><span class="gradient-text">who learned to ship AI.</span>
+          <h2 class="section-title">Customer-first product engineer<br /><span class="gradient-text">who learned to ship.</span>
           </h2>
           <p>A decade in product engineering taught me that great software starts with the people using it, not the framework you pick. I bring that same discipline to AI: understand the operator, the domain, and the workflow first; choose the model and the stack second.</p>
           <p>At Xcontrol I sit aboard vessels with customers before I write a line of code. I run discovery sessions with cruise line operators and ship IT crews, capture what actually breaks in daily operations, and translate that into product specs the team can build against, then into AI features that fit the workflow rather than the demo reel.</p>

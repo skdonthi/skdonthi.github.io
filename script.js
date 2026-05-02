@@ -1,3 +1,26 @@
+// Theme toggle (sketch ↔ clean) — sketch is default
+(function initTheme() {
+  const STORAGE_KEY = 'skd-theme';
+  const root = document.documentElement;
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved === 'clean') {
+    root.removeAttribute('data-theme');
+  } else {
+    root.setAttribute('data-theme', 'sketch');
+  }
+  const btn = document.getElementById('theme-toggle');
+  btn?.addEventListener('click', () => {
+    const isSketch = root.getAttribute('data-theme') === 'sketch';
+    if (isSketch) {
+      root.removeAttribute('data-theme');
+      localStorage.setItem(STORAGE_KEY, 'clean');
+    } else {
+      root.setAttribute('data-theme', 'sketch');
+      localStorage.setItem(STORAGE_KEY, 'sketch');
+    }
+  });
+})();
+
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
