@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Baby Monitor for Cruise Cabins | Shiva Krishna Donthi</title>
+  <meta name="description" content="Architecture for streaming live baby-monitor video to parents and guardians across a cruise ship's WLAN — WebRTC, an SFU, audio cry-detection, and offline-first auth." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* Scoped styling for the embedded architecture diagram */
+    .arch-figure { margin: 2.5rem 0; }
+    .arch-figure svg { width: 100%; height: auto; display: block; }
+    .arch-figure figcaption {
+      margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.8rem;
+      color: var(--text-3); text-align: center;
+    }
+    .arch svg text { font-family: 'Inter', system-ui, sans-serif; }
+    .arch .bx   { fill: #131929; stroke: rgba(255,255,255,0.10); stroke-width: 1; }
+    .arch .vid  { fill: rgba(79,156,249,0.12);  stroke: #4f9cf9; stroke-width: 1.2; }
+    .arch .evt  { fill: rgba(124,58,237,0.16);  stroke: #7c3aed; stroke-width: 1.2; }
+    .arch .t    { fill: #f1f5f9; font-size: 14px; font-weight: 600; }
+    .arch .s    { fill: #94a3b8; font-size: 12px; }
+    .arch .arr  { stroke: #64748b; stroke-width: 1.5; fill: none; }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">SKD<span class="accent">.</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#blog">Blog</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="blog-page">
+    <div class="container">
+      <div class="blog-page-header">
+        <a href="../index.html#blog" class="blog-page-back">← Back to blog</a>
+        <div class="section-label">System Design</div>
+        <h1 class="blog-page-title">A Baby Monitor for Cruise Cabins</h1>
+        <div class="blog-page-meta">
+          <span>Shiva Krishna Donthi</span>
+          <span>·</span>
+          <span>7 min read</span>
+          <span>·</span>
+          <span>2026</span>
+        </div>
+      </div>
+
+      <article class="blog-page-body">
+        <p>Here's a deceptively simple ask: a camera watches a sleeping baby in a cruise cabin, and the parents — plus a grandparent two decks up at dinner — want to glance at the live stream from their phones. The camera should also notice when the baby cries and nudge everyone watching. All of this on the ship's WLAN, with no reliable internet.</p>
+
+        <p>It sounds like a weekend project. It isn't. Every assumption you'd make building this for a house with home broadband breaks the moment you're at sea. This is the architecture I'd reach for, and why.</p>
+
+        <h2>The shape of the problem</h2>
+
+        <p>One cabin, one camera, a handful of authorized viewers. That "handful" is the trap. It's more than one viewer, so peer-to-peer doesn't cut it — and the camera's uplink is the weakest link in the whole chain. A cheap IP camera asked to encode and send three independent streams will fall over. So the fan-out has to happen somewhere that <em>isn't</em> the camera.</p>
+
+        <h2>The architecture</h2>
+
+        <figure class="arch-figure arch">
+          <svg viewBox="0 0 680 500" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>Cruise cabin baby-monitor streaming architecture</title>
+            <desc>An IP camera feeds an edge media server (SFU) plus an audio cry-detection service. Those connect to core services — auth, REST API, signaling, and an MQTT broker — backed by a SQL database, and serve the mobile app, cabin IPTV, and an admin portal over the ship WLAN.</desc>
+            <defs>
+              <marker id="ah" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+                <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#64748b" stroke-width="1.3" />
+              </marker>
+            </defs>
+
+            <!-- Tier 1: camera -->
+            <rect class="vid" x="240" y="52" width="200" height="48" rx="10" />
+            <text class="t" x="340" y="74" text-anchor="middle">IP camera (cabin)</text>
+            <text class="s" x="340" y="91" text-anchor="middle">RTSP/ONVIF · H.264 · Opus</text>
+
+            <!-- ingest arrows -->
+            <path class="arr" marker-end="url(#ah)" d="M312 100 L234 136" />
+            <path class="arr" marker-end="url(#ah)" d="M368 100 L446 136" />
+
+            <!-- Tier 2: edge media node -->
+            <rect class="vid" x="110" y="138" width="220" height="54" rx="10" />
+            <text class="t" x="220" y="162" text-anchor="middle">Media server / SFU</text>
+            <text class="s" x="220" y="179" text-anchor="middle">go2rtc · MediaMTX</text>
+
+            <rect class="evt" x="350" y="138" width="220" height="54" rx="10" />
+            <text class="t" x="460" y="162" text-anchor="middle">Audio analytics</text>
+            <text class="s" x="460" y="179" text-anchor="middle">baby-cry ML (YAMNet)</text>
+
+            <!-- backbone arrows -->
+            <path class="arr" marker-end="url(#ah)" d="M226 192 L258 228" />
+            <path class="arr" marker-end="url(#ah)" d="M468 192 L548 228" />
+
+            <!-- Tier 3: core services -->
+            <rect class="bx" x="40" y="232" width="135" height="46" rx="9" />
+            <text class="t" x="107" y="260" text-anchor="middle">Auth · JWT</text>
+            <rect class="bx" x="192" y="232" width="135" height="46" rx="9" />
+            <text class="t" x="259" y="260" text-anchor="middle">REST API</text>
+            <rect class="vid" x="344" y="232" width="135" height="46" rx="9" />
+            <text class="t" x="411" y="260" text-anchor="middle">Signaling · WS</text>
+            <rect class="evt" x="496" y="232" width="135" height="46" rx="9" />
+            <text class="t" x="563" y="260" text-anchor="middle">MQTT broker</text>
+
+            <!-- core to DB -->
+            <path class="arr" marker-end="url(#ah)" d="M259 278 L332 311" />
+            <path class="arr" marker-end="url(#ah)" d="M411 278 L350 311" />
+
+            <!-- Tier 4: data -->
+            <rect class="bx" x="240" y="314" width="200" height="46" rx="9" />
+            <text class="t" x="340" y="335" text-anchor="middle">SQL DB</text>
+            <text class="s" x="340" y="352" text-anchor="middle">SQLite / PostgreSQL</text>
+
+            <!-- client source labels + short arrows -->
+            <text class="s" x="132" y="390" text-anchor="middle">WebRTC video + WS events</text>
+            <path class="arr" marker-end="url(#ah)" d="M132 394 L132 401" />
+            <text class="s" x="339" y="390" text-anchor="middle">HLS / MPEG-TS multicast</text>
+            <path class="arr" marker-end="url(#ah)" d="M339 394 L339 401" />
+            <text class="s" x="547" y="390" text-anchor="middle">HTTPS REST + auth</text>
+            <path class="arr" marker-end="url(#ah)" d="M547 394 L547 401" />
+
+            <!-- Tier 5: clients -->
+            <rect class="vid" x="40" y="404" width="185" height="48" rx="10" />
+            <text class="t" x="132" y="426" text-anchor="middle">Mobile app</text>
+            <text class="s" x="132" y="443" text-anchor="middle">iOS / Android · WebRTC</text>
+
+            <rect class="vid" x="247" y="404" width="185" height="48" rx="10" />
+            <text class="t" x="339" y="426" text-anchor="middle">Cabin IPTV / TV</text>
+            <text class="s" x="339" y="443" text-anchor="middle">STB · multicast</text>
+
+            <rect class="bx" x="455" y="404" width="185" height="48" rx="10" />
+            <text class="t" x="547" y="426" text-anchor="middle">Admin portal</text>
+            <text class="s" x="547" y="443" text-anchor="middle">assign cam ↔ cabin</text>
+
+            <!-- legend -->
+            <rect class="vid" x="44" y="473" width="11" height="11" rx="3" />
+            <text class="s" x="62" y="482">video / media path</text>
+            <rect class="evt" x="206" y="473" width="11" height="11" rx="3" />
+            <text class="s" x="224" y="482">events / control path</text>
+          </svg>
+          <figcaption>One stream up from the camera, fanned out to many viewers by an edge SFU.</figcaption>
+        </figure>
+
+        <h2>Why WebRTC, not MQTT</h2>
+
+        <p>People reach for MQTT here because they've seen it in IoT diagrams. But MQTT moves <em>messages</em>, not video. The two belong on different planes:</p>
+
+        <ul>
+          <li><strong>Video to a phone:</strong> WebRTC, over SRTP/DTLS. Sub-second latency, adaptive bitrate, and on a LAN there's no NAT traversal pain.</li>
+          <li><strong>Camera ingest:</strong> RTSP/ONVIF — what the camera natively speaks.</li>
+          <li><strong>Video to the cabin TV:</strong> HLS or MPEG-TS multicast, which the onboard IPTV set-top boxes already tune to. A few seconds of latency is fine for a TV.</li>
+          <li><strong>Events</strong> (a cry detected, a viewer joins): MQTT, which is exactly right for tiny pub/sub payloads.</li>
+          <li><strong>Assigning a camera, logging in, listing cabins:</strong> plain REST over HTTPS.</li>
+        </ul>
+
+        <p>So the service isn't "a WebRTC thing" or "an MQTT thing" — it's a control plane (REST) and a media plane (WebRTC) with a thin realtime spine (MQTT + WebSockets) tying them together.</p>
+
+        <h2>The SFU earns its keep</h2>
+
+        <p>The camera sends a single stream up. A lightweight Selective Forwarding Unit — <span style="font-family: var(--font-mono); color: var(--accent);">go2rtc</span> or <span style="font-family: var(--font-mono); color: var(--accent);">MediaMTX</span>, single Go binary — pulls that RTSP feed once and forwards encoded frames to each viewer. No transcoding on the app path, so it stays cheap.</p>
+
+        <p>Per cabin the fan-out is tiny. The number that sizes your hardware is the aggregate: a couple hundred cabins actively monitoring, three viewers each, is roughly 200 streams in and 600 out. That's comfortable for one mid-size server — but I'd still place SFU nodes per deck, not to add CPU, but to keep video traffic on the local access points instead of hauling it across the WLAN backbone.</p>
+
+        <p>Simulcast handles the rest: the camera publishes two or three quality layers, and the SFU hands the grandparent on a weak signal a 360p layer while the parent near the cabin gets 720p — from the same source.</p>
+
+        <h2>Only the right people see the baby</h2>
+
+        <p>Authorization is multi-grantee by design. The parent is the owner, granted access on check-in from the ship's PMS booking. They can invite a guardian from the app. The grant lives in a small table:</p>
+
+        <ul>
+          <li><strong>Login</strong> issues a short-lived JWT tied to the cabin and booking.</li>
+          <li>The app asks the API for cameras on that cabin; the server checks the grant table.</li>
+          <li>If allowed, it issues a <strong>stream token scoped to that one camera</strong>, short expiry.</li>
+          <li>The SFU validates that token before forwarding a single frame.</li>
+        </ul>
+
+        <p>Revoking a guardian is one deleted row — the next token request simply fails. And because a new grant publishes to <span style="font-family: var(--font-mono); color: var(--accent);">cabin/{id}/cameras</span> over MQTT, the moment a camera is assigned, the menu item appears live in the app. Tap it, fetch a token, and the stream starts. No polling.</p>
+
+        <h2>Hearing the cry</h2>
+
+        <p>An audio analytics service taps the camera's audio track, runs a small classifier (YAMNet, or a compact CNN over a mel-spectrogram) and publishes <span style="font-family: var(--font-mono); color: var(--accent);">cabin/{id}/alert</span> when it recognizes an infant cry. Every authorized viewer is subscribed, so all their phones buzz at once. Better still, run the model on the camera itself if the hardware allows — then the audio never leaves the device.</p>
+
+        <h2>The hard part nobody mentions</h2>
+
+        <blockquote>
+          <p>No internet means no APNs and no FCM. Cloud push notifications simply do not exist at sea.</p>
+        </blockquote>
+
+        <p>This is the constraint that quietly kills naive designs. The cry alert can't ride Apple or Google's push infrastructure, because both need the public internet. On a ship it has to travel over a persistent MQTT-over-WebSocket connection the app holds while it's on the WLAN. That works beautifully while the app is foreground — and runs straight into mobile OS background limits otherwise. There's no clever workaround; it's a product decision about how the alert is allowed to reach a backgrounded phone, and it deserves to be made early, not discovered late.</p>
+
+        <h2>Keeping the data plane lean</h2>
+
+        <p>The database barely breaks a sweat: <span style="font-family: var(--font-mono); color: var(--accent);">guests</span>, <span style="font-family: var(--font-mono); color: var(--accent);">cabins</span>, <span style="font-family: var(--font-mono); color: var(--accent);">cameras</span>, <span style="font-family: var(--font-mono); color: var(--accent);">camera_grants</span>, <span style="font-family: var(--font-mono); color: var(--accent);">alerts</span>, and an audit log. SQLite is honestly enough for a single ship server. I'd still pick PostgreSQL for concurrent writers, durability, and a warm replica to a backup node — because cameras in cabins make the audit log non-negotiable, and privacy and consent rules deserve real rigor.</p>
+
+        <h2>What sea duty teaches you</h2>
+
+        <ul>
+          <li>Put the fan-out where the bandwidth is, never on the device with the weakest uplink.</li>
+          <li>Match each protocol to its job; resist the urge to make one protocol do everything.</li>
+          <li>Keep video on the local network segment — locality beats raw horsepower on a WLAN.</li>
+          <li>The offline constraint isn't a footnote. It reshapes auth, alerts, and storage all at once.</li>
+        </ul>
+
+        <p>If you're designing streaming or AI systems for constrained, disconnected, or regulated environments, I'd be glad to compare notes. Reach out via <a href="mailto:skdonthi@outlook.com" style="color: var(--accent);">email</a> or <a href="https://linkedin.com/in/skdonthi" style="color: var(--accent);">LinkedIn</a>.</p>
+      </article>
+    </div>
+  </main>
+
+  <script src="../script.js"></script>
+</body>
+</html>
