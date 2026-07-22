@@ -1,140 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recommendations | Shiva Krishna Donthi</title>
+  <title>What Colleagues Say · Shiva Krishna Donthi</title>
+  <meta name="description"
+    content="LinkedIn recommendations from colleagues at Xcontrol and ValueLabs on technical depth, architecture, delivery, and growth." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css" />
-  <style>
-    .rec-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-      margin-bottom: 24px;
-      transition: border-color var(--transition);
-    }
-    .rec-card:hover { border-color: var(--border-h); }
-    .rec-quote {
-      font-size: 1.05rem;
-      color: var(--text-1);
-      line-height: 1.8;
-      margin-bottom: 28px;
-      font-style: italic;
-      position: relative;
-      padding-left: 20px;
-      border-left: 2px solid var(--accent);
-    }
-    .rec-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .rec-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--grad);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 1rem;
-      color: #fff;
-      flex-shrink: 0;
-    }
-    .rec-name {
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--text-1);
-    }
-    .rec-role { font-size: 0.82rem; color: var(--text-3); margin-top: 2px; }
-    .rec-company { color: var(--accent); }
-  </style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,500;10..72,700;10..72,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../harbor.css" />
+  <link rel="stylesheet" href="../harbor-post.css" />
+  <script>
+    (function () {
+      try {
+        var p = localStorage.getItem("skd-theme");
+        var d = (p === "light" || p === "dark") ? p
+          : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.dataset.theme = d;
+      } catch (e) { /* default dark */ }
+    })();
+  </script>
 </head>
+
 <body>
-  <nav id="navbar">
-    <div class="nav-inner">
-      <a href="../index.html" class="nav-logo">SKD<span class="accent">.</span></a>
-      <ul class="nav-links">
-        <li><a href="../index.html#log-about">About</a></li>
-        <li><a href="../index.html#log-voyage">Experience</a></li>
-        <li><a href="../index.html#log-stack">Skills</a></li>
-        <li><a href="../index.html#log-dispatches">Blog</a></li>
-        <li><a href="../index.html#log-contact" class="nav-cta">Contact</a></li>
-      </ul>
+
+  <header class="topbar" id="topbar">
+    <a href="../index.html" class="brand">SK<span class="brand-slash">/</span>DONTHI</a>
+    <nav class="topnav" id="topnav">
+      <a href="../index.html#log-about"><span class="nav-idx">01</span> ABOUT</a>
+      <a href="../index.html#log-principles"><span class="nav-idx">02</span> PRINCIPLES</a>
+      <a href="../index.html#log-voyage"><span class="nav-idx">03</span> VOYAGE</a>
+      <a href="../index.html#log-stack"><span class="nav-idx">04</span> STACK</a>
+      <a href="../index.html#log-dispatches"><span class="nav-idx">05</span> DISPATCHES</a>
+      <a href="../index.html#log-contact" class="nav-contact"><span class="nav-idx">06</span> CONTACT</a>
+    </nav>
+    <div class="ship-clock mono" aria-label="Hamburg local time">
+      <span class="clock-port">HAM</span>
+      <span id="clock">--:--:--</span>
     </div>
-  </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">AUTO</button>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
 
-  <main class="blog-page">
-    <div class="container">
-      <div class="blog-page-header">
-        <a href="../index.html#log-dispatches" class="blog-page-back">← Back to blog</a>
-        <div class="section-label">Recommendations</div>
-        <h1 class="blog-page-title">What Colleagues Say</h1>
-        <div class="blog-page-meta">
-          <span>LinkedIn Recommendations</span>
-          <span>·</span>
-          <span>3 min read</span>
+  <main class="post">
+    <a class="post-back" href="../index.html#log-dispatches">← ALL DISPATCHES</a>
+
+    <div class="post-head">
+      <p class="post-eyebrow">DISPATCH · RECOMMENDATIONS · 3 MIN READ</p>
+      <h1 class="post-title">What Colleagues Say</h1>
+      <p class="post-meta">LINKEDIN RECOMMENDATIONS</p>
+    </div>
+
+    <article class="post-body">
+
+      <div class="rec-card">
+        <p class="rec-quote">
+          "Shiva and I worked together at Xcontrol GmbH. From the beginning, he showed great ability to become familiar with the systems at Xcontrol. He was active in managing the Java Spring Boot backend and building REST APIs with very tight timelines on multiple projects. He also showed great skill with the Angular frontend, building several interactive UIs for many clients. He is passionate about software development, continuously gaining skills in ML and building full-stack apps with LLMs and AI agents. I would strongly recommend Shiva for any full-stack or AI engineer role at a senior level."
+        </p>
+        <div class="rec-author">
+          <div class="rec-avatar">SI</div>
+          <div>
+            <div class="rec-name">Shivkumar Iyer</div>
+            <div class="rec-role">Senior Engineer · <span class="rec-company">Xcontrol GmbH</span></div>
+          </div>
         </div>
       </div>
 
-      <div style="max-width: 680px;">
-
-        <div class="rec-card">
-          <p class="rec-quote">
-            "Shiva and I worked together at Xcontrol GmbH. From the beginning, he showed great ability to become familiar with the systems at Xcontrol. He was active in managing the Java Spring Boot backend and building REST APIs with very tight timelines on multiple projects. He also showed great skill with the Angular frontend, building several interactive UIs for many clients. He is passionate about software development, continuously gaining skills in ML and building full-stack apps with LLMs and AI agents. I would strongly recommend Shiva for any full-stack or AI engineer role at a senior level."
-          </p>
-          <div class="rec-author">
-            <div class="rec-avatar">SI</div>
-            <div>
-              <div class="rec-name">Shivkumar Iyer</div>
-              <div class="rec-role">Senior Engineer · <span class="rec-company">Xcontrol GmbH</span></div>
-            </div>
+      <div class="rec-card">
+        <p class="rec-quote">
+          "Shiva is one of those rare engineers who can comfortably move between deep technical discussions and customer-facing conversations. During our time at Xcontrol, I saw him take ownership of complex projects, mentor team members, and consistently deliver solutions that balanced technical quality with business value. His expertise spans full-stack development, system architecture, and more recently AI-powered applications, but what impressed me most was his ability to understand the bigger picture and translate ideas into practical solutions. Shiva is dependable, innovative, and always willing to help others succeed. I would gladly work with Shiva again and strongly recommend him for any leadership or senior engineering role."
+        </p>
+        <div class="rec-author">
+          <div class="rec-avatar">VT</div>
+          <div>
+            <div class="rec-name">Vasu Thammaiah</div>
+            <div class="rec-role">Senior Java Full-Stack Engineer · <span class="rec-company">Xcontrol GmbH</span></div>
           </div>
         </div>
-
-        <div class="rec-card">
-          <p class="rec-quote">
-            "Shiva is one of those rare engineers who can comfortably move between deep technical discussions and customer-facing conversations. During our time at Xcontrol, I saw him take ownership of complex projects, mentor team members, and consistently deliver solutions that balanced technical quality with business value. His expertise spans full-stack development, system architecture, and more recently AI-powered applications, but what impressed me most was his ability to understand the bigger picture and translate ideas into practical solutions. Shiva is dependable, innovative, and always willing to help others succeed. I would gladly work with Shiva again and strongly recommend him for any leadership or senior engineering role."
-          </p>
-          <div class="rec-author">
-            <div class="rec-avatar">VT</div>
-            <div>
-              <div class="rec-name">Vasu Thammaiah</div>
-              <div class="rec-role">Senior Java Full-Stack Engineer · <span class="rec-company">Xcontrol GmbH</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="rec-card">
-          <p class="rec-quote">
-            "Shiva Krishna has proven to be a valuable member of our team. He joined us as a fresher and, within a short period, established himself as a key contributor by consistently delivering quality work. He is a quick learner and shows strong enthusiasm for exploring and adopting new technologies."
-          </p>
-          <div class="rec-author">
-            <div class="rec-avatar">KG</div>
-            <div>
-              <div class="rec-name">Kishore Geekuru</div>
-              <div class="rec-role">Engineering Lead · <span class="rec-company">ValueLabs</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-page-body" style="margin-top: 48px;">
-          <p>Want to add your own recommendation? We've worked together, I'd love to hear from you.</p>
-          <p>
-            <a href="https://linkedin.com/in/skdonthi" target="_blank" rel="noopener" style="color: var(--accent);">Leave a recommendation on LinkedIn →</a>
-          </p>
-        </div>
-
       </div>
+
+      <div class="rec-card">
+        <p class="rec-quote">
+          "Shiva Krishna has proven to be a valuable member of our team. He joined us as a fresher and, within a short period, established himself as a key contributor by consistently delivering quality work. He is a quick learner and shows strong enthusiasm for exploring and adopting new technologies."
+        </p>
+        <div class="rec-author">
+          <div class="rec-avatar">KG</div>
+          <div>
+            <div class="rec-name">Kishore Geekuru</div>
+            <div class="rec-role">Engineering Lead · <span class="rec-company">ValueLabs</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top: 3rem;">Want to add your own recommendation? We've worked together, I'd love to hear from you.</p>
+      <p>
+        <a href="https://linkedin.com/in/skdonthi" target="_blank" rel="noopener">Leave a recommendation on LinkedIn →</a>
+      </p>
+    </article>
+
+    <div class="post-foot">
+      <a href="../index.html#log-dispatches">← ALL DISPATCHES</a>
+      <a href="../index.html#log-contact">OPEN A CHANNEL →</a>
     </div>
   </main>
 
-  <script src="../script.js"></script>
+  <footer class="foot mono">
+    <span>© 2026 · SHIVA KRISHNA DONTHI</span>
+  </footer>
+
+  <script src="../harbor.js"></script>
 </body>
+
 </html>

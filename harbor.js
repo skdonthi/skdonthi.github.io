@@ -2,6 +2,46 @@
 (function () {
   "use strict";
 
+  /* theme: system / light / dark, persisted */
+  var THEME_KEY = "skd-theme";
+  var toggle = document.getElementById("theme-toggle");
+  var media = window.matchMedia("(prefers-color-scheme: light)");
+
+  function themePref() {
+    try {
+      var p = localStorage.getItem(THEME_KEY);
+      return p === "light" || p === "dark" ? p : "system";
+    } catch (e) {
+      return "system";
+    }
+  }
+
+  function applyTheme() {
+    var pref = themePref();
+    var resolved = pref === "system" ? (media.matches ? "light" : "dark") : pref;
+    document.documentElement.dataset.theme = resolved;
+    if (toggle) {
+      var label = pref === "system" ? "AUTO" : pref === "light" ? "DAY" : "NIGHT";
+      toggle.textContent = label;
+      toggle.setAttribute("aria-label", "Theme: " + label.toLowerCase() + ". Click to switch.");
+    }
+  }
+
+  if (toggle) {
+    toggle.addEventListener("click", function () {
+      var next = { system: "light", light: "dark", dark: "system" }[themePref()];
+      try {
+        if (next === "system") localStorage.removeItem(THEME_KEY);
+        else localStorage.setItem(THEME_KEY, next);
+      } catch (e) { /* storage unavailable */ }
+      applyTheme();
+    });
+  }
+  media.addEventListener("change", function () {
+    if (themePref() === "system") applyTheme();
+  });
+  applyTheme();
+
   /* ship's clock - Hamburg local time */
   var clockEl = document.getElementById("clock");
   function tickClock() {

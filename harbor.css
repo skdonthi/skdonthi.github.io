@@ -4,7 +4,12 @@
    Type: Big Shoulders (display) · Instrument Sans (body) · IBM Plex Mono (data)
    ============================================================ */
 
+html { color-scheme: dark; }
+html[data-theme="light"] { color-scheme: light; }
+
 :root {
+  --bar: rgba(7, 18, 25, 0.88);
+  --bar-solid: rgba(7, 18, 25, 0.97);
   --ink: #071219;
   --ink-2: #0a1a23;
   --panel: #0d2130;
@@ -20,6 +25,23 @@
   --body: "Instrument Sans", "Helvetica Neue", sans-serif;
   --mono: "IBM Plex Mono", "SFMono-Regular", monospace;
   --pad: clamp(1.25rem, 5vw, 5rem);
+}
+
+/* day chart - light theme */
+:root[data-theme="light"] {
+  --bar: rgba(242, 238, 225, 0.88);
+  --bar-solid: rgba(242, 238, 225, 0.97);
+  --ink: #f2eee1;
+  --ink-2: #eae3d1;
+  --panel: #e3dbc6;
+  --line: rgba(23, 77, 90, 0.15);
+  --line-strong: rgba(23, 77, 90, 0.32);
+  --foam: #16323c;
+  --mist: #46656f;
+  --mist-dim: #98a9ac;
+  --signal: #d84c25;
+  --signal-soft: rgba(216, 76, 37, 0.1);
+  --ok: #157a50;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,7 +78,7 @@ a { color: inherit; }
 }
 
 .topbar.scrolled {
-  background: rgba(7, 18, 25, 0.88);
+  background: var(--bar);
   backdrop-filter: blur(10px);
   border-bottom-color: var(--line);
 }
@@ -101,6 +123,21 @@ a { color: inherit; }
 }
 
 .clock-port { color: var(--mist-dim); margin-right: 0.6em; }
+
+.theme-toggle {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: var(--mist);
+  background: none;
+  border: 1px solid var(--line-strong);
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover { color: var(--foam); border-color: var(--signal); }
 
 .nav-burger {
   display: none;
@@ -313,6 +350,52 @@ a { color: inherit; }
 
 @keyframes drift {
   to { transform: translateX(-50%); }
+}
+
+/* ---------- compass quote ---------- */
+.compass-quote {
+  padding: clamp(5rem, 10vw, 9rem) var(--pad);
+  text-align: center;
+}
+
+.cq-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--signal);
+  margin-bottom: 2.2rem;
+}
+
+.cq-label::after {
+  content: "";
+  display: inline-block;
+  width: 60px;
+  height: 1px;
+  background: var(--line-strong);
+  vertical-align: middle;
+  margin-left: 1.1rem;
+}
+
+.cq-text {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 3.4rem);
+  line-height: 1.25;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  max-width: 24ch;
+  margin: 0 auto;
+  color: var(--foam);
+}
+
+.cq-dim { color: var(--mist); }
+
+.cq-text em {
+  font-style: normal;
+  display: inline-block;
+  background: var(--signal);
+  color: var(--ink);
+  padding: 0.05em 0.25em;
+  transform: rotate(-0.6deg);
 }
 
 /* ---------- log sections ---------- */
@@ -790,7 +873,7 @@ a:focus-visible, button:focus-visible {
     left: 0;
     flex-direction: column;
     gap: 0;
-    background: rgba(7, 18, 25, 0.97);
+    background: var(--bar-solid);
     border-bottom: 1px solid var(--line);
     padding: 0.5rem 0;
     display: none;

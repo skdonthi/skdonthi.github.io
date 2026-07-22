@@ -13,13 +13,23 @@
     href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,500;10..72,700;10..72,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="harbor.css" />
+  <script>
+    (function () {
+      try {
+        var p = localStorage.getItem("skd-theme");
+        var d = (p === "light" || p === "dark") ? p
+          : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.dataset.theme = d;
+      } catch (e) { /* default dark */ }
+    })();
+  </script>
 </head>
 
 <body>
 
   <!-- NAV -->
   <header class="topbar" id="topbar">
-    <a href="#top" class="brand">SHIVA<span class="brand-slash">/</span>DONTHI</a>
+    <a href="#top" class="brand">SK<span class="brand-slash">/</span>DONTHI</a>
     <nav class="topnav" id="topnav">
       <a href="#log-about"><span class="nav-idx">01</span> ABOUT</a>
       <a href="#log-principles"><span class="nav-idx">02</span> PRINCIPLES</a>
@@ -32,6 +42,7 @@
       <span class="clock-port">HAM</span>
       <span id="clock">--:--:--</span>
     </div>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">AUTO</button>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span>
     </button>
@@ -104,6 +115,13 @@
       <span>POSTGRESQL</span><span>TYPESCRIPT</span><span>MARITIME SAAS</span><span>OFFLINE-FIRST</span>
     </div>
   </div>
+
+  <!-- MY COMPASS -->
+  <section class="compass-quote" aria-label="My compass">
+    <p class="cq-label mono">MY COMPASS</p>
+    <p class="cq-text"><span class="cq-dim">I don't fall in love with ideas.</span><br />
+      I fall in love with solving <em>the customer's problem.</em></p>
+  </section>
 
   <!-- LOG 01 · ABOUT -->
   <section class="log" id="log-about">
