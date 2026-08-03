@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teaching an AI Agent to Hold the Remote · Shiva Krishna Donthi</title>
+  <meta name="description"
+    content="Building tv-mcp, an open-source MCP server that lets AI agents build, deploy, and debug web apps on Samsung Tizen and LG webOS TVs — and what a real hospitality panel taught it in one afternoon." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,500;10..72,700;10..72,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../harbor.css" />
+  <link rel="stylesheet" href="../harbor-post.css" />
+  <script>
+    (function () {
+      try {
+        var p = localStorage.getItem("skd-theme");
+        var d = (p === "light" || p === "dark") ? p
+          : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.dataset.theme = d;
+      } catch (e) { /* default dark */ }
+    })();
+  </script>
+</head>
+
+<body>
+
+  <header class="topbar" id="topbar">
+    <a href="../index.html" class="brand">SK<span class="brand-slash">/</span>DONTHI</a>
+    <nav class="topnav" id="topnav">
+      <a href="../index.html#log-about"><span class="nav-idx">01</span> ABOUT</a>
+      <a href="../index.html#log-principles"><span class="nav-idx">02</span> PRINCIPLES</a>
+      <a href="../index.html#log-voyage"><span class="nav-idx">03</span> VOYAGE</a>
+      <a href="../index.html#log-stack"><span class="nav-idx">04</span> STACK</a>
+      <a href="../index.html#log-dispatches"><span class="nav-idx">05</span> DISPATCHES</a>
+      <a href="../index.html#log-contact" class="nav-contact"><span class="nav-idx">06</span> CONTACT</a>
+    </nav>
+    <div class="ship-clock mono" aria-label="Hamburg local time">
+      <span class="clock-port">HAM</span>
+      <span id="clock">--:--:--</span>
+    </div>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">AUTO</button>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main class="post">
+    <a class="post-back" href="../index.html#log-dispatches">← ALL DISPATCHES</a>
+
+    <div class="post-head">
+      <p class="post-eyebrow">DISPATCH · DEVELOPER TOOLS · 8 MIN READ</p>
+      <h1 class="post-title">Teaching an AI Agent to Hold the Remote</h1>
+      <p class="post-meta">SHIVA KRISHNA DONTHI · 2026</p>
+    </div>
+
+    <article class="post-body">
+      <p>Smart TV development has the worst inner loop in web development. Your app is a web app, but it lives inside two vendor SDKs, behind a certificate ceremony, on a screen that is physically across the room. Change a line of CSS and the ritual begins: package, sign, install over the network, walk to the TV, squint, walk back. Samsung and LG each have their own CLI, their own signing story, their own ways of failing silently.</p>
+
+      <p>Meanwhile, AI coding agents got good. An agent can edit the code, run the build, read the logs — but it can't see the TV. So I built <a href="https://github.com/skdonthi/tv-mcp">tv-mcp</a>, an open-source <a href="https://modelcontextprotocol.io">Model Context Protocol</a> server that hands the whole loop to the agent: build, sign, install, launch, screenshot, read the console, press remote keys. On real Samsung Tizen and LG webOS panels. This is how it's put together, and what one afternoon with a real hospitality TV taught it.</p>
+
+      <h2>The one insight the whole design hangs on</h2>
+
+      <p>A Tizen <code>.wgt</code> and a webOS <code>.ipk</code> look like alien artifacts, but inside both wrappers sits a Chromium webview — and both platforms expose that webview's remote inspector. That's the Chrome DevTools Protocol, the same thing your desktop browser speaks.</p>
+
+      <p>So the server splits into two planes. A <strong>platform plane</strong> per vendor handles everything genuinely different: packaging, signing, installing, launching, via <code>tizen</code>/<code>sdb</code> on Samsung and <code>ares-*</code> on LG. And a single shared <strong>debug plane</strong> rides CDP: screenshots via <code>Page.captureScreenshot</code>, console capture, JavaScript evaluation inside the running app. Write it once, and it works identically on both brands, because underneath it's just Chromium.</p>
+
+      <figure class="arch">
+        <svg viewBox="0 0 680 380" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>tv-mcp architecture</title>
+          <desc>An MCP client connects over stdio to tv-mcp, which contains a Tizen driver, a webOS driver, and a shared CDP bridge. The drivers talk to Samsung and LG TVs through vendor CLIs; the CDP bridge talks to the app's webview on either TV.</desc>
+          <defs>
+            <marker id="ah" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+              <path class="arr-head" d="M0,0 L6.5,3 L0,6" />
+            </marker>
+          </defs>
+
+          <!-- Tier 1: client -->
+          <rect class="bx" x="215" y="30" width="250" height="48" rx="10" />
+          <text class="t" x="340" y="52" text-anchor="middle">MCP client</text>
+          <text class="s" x="340" y="69" text-anchor="middle">Claude Code · Cursor · VS Code</text>
+
+          <path class="arr" marker-end="url(#ah)" d="M340 78 L340 106" />
+          <text class="s" x="368" y="97">stdio</text>
+
+          <!-- Tier 2: server -->
+          <rect class="bx" x="215" y="108" width="250" height="48" rx="10" />
+          <text class="t" x="340" y="130" text-anchor="middle">tv-mcp</text>
+          <text class="s" x="340" y="147" text-anchor="middle">13 tools · 3 disclosure tiers</text>
+
+          <path class="arr" marker-end="url(#ah)" d="M258 156 L138 190" />
+          <path class="arr" marker-end="url(#ah)" d="M340 156 L340 190" />
+          <path class="arr" marker-end="url(#ah)" d="M422 156 L542 190" />
+
+          <!-- Tier 3: planes -->
+          <rect class="vid" x="40" y="192" width="196" height="54" rx="10" />
+          <text class="t" x="138" y="216" text-anchor="middle">TizenDriver</text>
+          <text class="s" x="138" y="233" text-anchor="middle">tizen · sdb · vd_appinstall</text>
+
+          <rect class="evt" x="242" y="192" width="196" height="54" rx="10" />
+          <text class="t" x="340" y="216" text-anchor="middle">CdpBridge (shared)</text>
+          <text class="s" x="340" y="233" text-anchor="middle">screenshot · console · eval</text>
+
+          <rect class="vid" x="444" y="192" width="196" height="54" rx="10" />
+          <text class="t" x="542" y="216" text-anchor="middle">WebOSDriver</text>
+          <text class="s" x="542" y="233" text-anchor="middle">ares-package · ares-inspect</text>
+
+          <!-- arrows to TVs -->
+          <path class="arr" marker-end="url(#ah)" d="M138 246 L184 292" />
+          <path class="arr" marker-end="url(#ah)" d="M296 246 L216 292" />
+          <path class="arr" marker-end="url(#ah)" d="M384 246 L464 292" />
+          <path class="arr" marker-end="url(#ah)" d="M542 246 L496 292" />
+
+          <!-- Tier 4: TVs -->
+          <rect class="bx" x="105" y="294" width="196" height="54" rx="10" />
+          <text class="t" x="203" y="318" text-anchor="middle">Samsung TV</text>
+          <text class="s" x="203" y="335" text-anchor="middle">Tizen · .wgt · Chromium inside</text>
+
+          <rect class="bx" x="380" y="294" width="196" height="54" rx="10" />
+          <text class="t" x="478" y="318" text-anchor="middle">LG TV</text>
+          <text class="s" x="478" y="335" text-anchor="middle">webOS · .ipk · Chromium inside</text>
+        </svg>
+        <figcaption>TWO VENDOR PLANES FOR WHAT DIFFERS, ONE CDP PLANE FOR WHAT DOESN'T.</figcaption>
+      </figure>
+
+      <h2>Thirteen tools, three at a time</h2>
+
+      <p>The lazy way to build an MCP server is to dump every tool schema on the model at session start. Thirteen tools' worth of JSON schema is context the agent pays for on every request, whether it's debugging a focus bug or just asking what devices exist.</p>
+
+      <p>tv-mcp discloses progressively instead. A fresh session sees exactly three tools: <code>list_devices</code>, <code>connect_device</code>, <code>docs</code>. Connect to a TV and the app-lifecycle tier appears — build, install, launch, logs. Launch with <code>debug: true</code> and the inspector tier unlocks: <code>screenshot</code>, <code>console_logs</code>, <code>eval_js</code>. The mechanism is vanilla MCP: tools register disabled, and <code>tool.enable()</code> fires a <code>tools/list_changed</code> notification so the client refreshes its list.</p>
+
+      <p>The deep platform knowledge follows the same rule. Tizen certificate internals, webOS dev-mode expiry, pairing protocols — none of it lives in tool descriptions. It ships as MCP resources the agent fetches only when it hits the corresponding wall. Tool descriptions stay one line each.</p>
+
+      <h2>Errors are UI for agents</h2>
+
+      <p>Every error the server throws carries a mandatory <code>remedy</code> field, because an agent can only fix what the error tells it to fix. "Install failed" is a dead end. This is a next move:</p>
+
+      <figure class="flow"><pre>Install rejected by TV (certificate):
+  Check certificate error : Invalid certificate chain
+
+Remedy: The distributor certificate does not cover this TV —
+  use a Samsung-issued certificate profile that includes this
+  device's DUID (sdb shell 0 getduid).
+  Read tvmcp://docs/tizen-signing.</pre></figure>
+
+      <p>That rule is enforced in the contributing guide, not just observed in the code. It's the difference between an agent that retries blindly and one that fixes the signing profile and moves on.</p>
+
+      <h2>Shipping without secrets</h2>
+
+      <p>The release pipeline has no long-lived credentials anywhere. npm publishing uses trusted publishing over OIDC — timely, since npm's 2FA-bypass tokens lose publishing rights in 2027 — and the official MCP Registry authenticates the GitHub Actions run itself via OIDC to authorize the <code>io.github.*</code> namespace. One <code>gh release create</code> and CI builds, tests, publishes to npm with provenance attestations, and updates the registry entry. Nothing to rotate, nothing to leak.</p>
+
+      <h2>Then a real TV had opinions</h2>
+
+      <p>Everything above worked in tests and against the SDK. Then I pointed it at the lab TV, which turned out to be a Samsung HG32F800 — a <em>hospitality</em> panel, the hotel-room kind. For a project pitched at hospitality and IPTV teams, the test hardware could not have been more on brand. In one afternoon it broke three of my clean abstractions.</p>
+
+      <p><strong>First: the official install command fails silently.</strong> <code>tizen install</code> reported "Failed to install Tizen application" with an empty platform log. Pushing the package with <code>sdb</code> and installing via <code>vd_appinstall</code> instead produced progress percentages and the actual failure: an invalid certificate chain. My signing profile used the generic Tizen distributor certificate, which real TVs reject — panels want a Samsung-issued certificate with the TV's own device ID (DUID) baked in. Switched profiles, install completed. The driver now uses the <code>sdb</code> path permanently, because an error you can read beats an official command that shrugs.</p>
+
+      <p><strong>Second: the relaunch deadlock.</strong> <code>sdb shell 0 debug</code> hangs forever if the app is already running. The driver dutifully killed the app first — except <code>pkgcmd</code> takes the <em>package id</em> (<code>TvMcpTest0</code>), not the full app id (<code>TvMcpTest0.tvmcptest</code>), so the kill silently failed and every second launch froze. Now it kills by package id, clears stale port forwards, and times the debug call out with a remedy instead of hanging.</p>
+
+      <p><strong>Third: hotel firmware locks the remote.</strong> The Samsung remote-control WebSocket API on port 8002 — which I'd implemented with the whole one-time pairing dance — is disabled outright on hospitality firmware. No prompt, no port, <code>EHOSTUNREACH</code>. The fallback saved the feature: since the debug plane can evaluate JavaScript in the app, it can dispatch synthetic <code>KeyboardEvent</code>s, which spatial-navigation frameworks treat exactly like real remote presses. The app logged <code>last key: 39</code> and the navigation test passed, on a panel where the "proper" API doesn't exist.</p>
+
+      <p>The loop the project promised held up end to end on that panel: the agent connected, packaged, signed, installed, launched with the inspector attached, pulled a screenshot over CDP, read its own <code>console.log</code> heartbeats, evaluated state inside the running app, and pressed keys. Nobody walked to the TV.</p>
+
+      <h2>What the panel taught me</h2>
+
+      <ul>
+        <li><strong>Find the shared substrate.</strong> Two hostile SDKs shrank to two thin drivers the moment I noticed both TVs are Chromium underneath. The 80% that's identical deserves one implementation.</li>
+        <li><strong>Context is a budget.</strong> Agents pay for every tool schema on every request. Disclose tools when they become usable, not when they're conceivable.</li>
+        <li><strong>Write errors for the reader that acts on them.</strong> For an agent that means machine-legible failure plus a concrete next step, every time.</li>
+        <li><strong>Real hardware is the review you can't skip.</strong> Three bugs in one afternoon, none visible in tests, all obvious on a panel. Ship the abstraction, then let the device mark it up.</li>
+      </ul>
+
+      <p>tv-mcp is MIT-licensed on <a href="https://github.com/skdonthi/tv-mcp">GitHub</a>, on <a href="https://www.npmjs.com/package/tv-mcp">npm</a> (<code>npx tv-mcp</code>), and in the official MCP Registry as <code>io.github.skdonthi/tv-mcp</code>. If you ship web apps to fleets of hotel or cruise TVs and want commercial-panel support (Pro:Centric, SSSP) to exist, the repo explains how to help — hardware access moves that roadmap faster than money. And if you're building MCP servers for hardware nobody thought agents would touch, I'd love to compare notes: <a href="mailto:skdonthi@outlook.com">email</a> or <a href="https://linkedin.com/in/skdonthi">LinkedIn</a>.</p>
+    </article>
+
+    <div class="post-foot">
+      <a href="../index.html#log-dispatches">← ALL DISPATCHES</a>
+      <a href="../index.html#log-contact">OPEN A CHANNEL →</a>
+    </div>
+  </main>
+
+  <footer class="foot mono">
+    <span>© 2026 · SHIVA KRISHNA DONTHI</span>
+  </footer>
+
+  <script src="../harbor.js"></script>
+</body>
+
+</html>
