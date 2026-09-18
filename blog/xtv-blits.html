@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sixty Frames on a Cabin TV · Shiva Krishna Donthi</title>
+  <meta name="description"
+    content="How I took the initiative to migrate xtv-platform's guest-facing TV apps from DOM rendering to Lightning Blits: the prototype that made the case, the widget kit that made it scale, and the on-device numbers." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Sixty Frames on a Cabin TV · Shiva Krishna Donthi" />
+  <meta property="og:description" content="How I took the initiative to migrate xtv-platform's guest-facing TV apps from DOM rendering to Lightning Blits: the prototype that made the case, the widget kit that made it scale, and the on-device numbers." />
+  <meta property="og:url" content="https://skdonthi.github.io/blog/xtv-blits.html" />
+  <meta property="og:image" content="https://skdonthi.github.io/assets/og/xtv-blits.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,500;10..72,700;10..72,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../harbor.css" />
+  <link rel="stylesheet" href="../harbor-post.css" />
+  <script>
+    (function () {
+      try {
+        var p = localStorage.getItem("skd-theme");
+        var d = (p === "light" || p === "dark") ? p
+          : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.dataset.theme = d;
+      } catch (e) { /* default dark */ }
+    })();
+  </script>
+</head>
+
+<body>
+
+  <header class="topbar" id="topbar">
+    <a href="../index.html" class="brand">SK<span class="brand-slash">/</span>DONTHI</a>
+    <nav class="topnav" id="topnav">
+      <a href="../index.html#log-about"><span class="nav-idx">01</span> ABOUT</a>
+      <a href="../index.html#log-principles"><span class="nav-idx">02</span> PRINCIPLES</a>
+      <a href="../index.html#log-voyage"><span class="nav-idx">03</span> VOYAGE</a>
+      <a href="../index.html#log-stack"><span class="nav-idx">04</span> STACK</a>
+      <a href="../index.html#log-dispatches"><span class="nav-idx">05</span> DISPATCHES</a>
+      <a href="../index.html#log-contact" class="nav-contact"><span class="nav-idx">06</span> CONTACT</a>
+    </nav>
+    <div class="ship-clock mono" aria-label="Hamburg local time">
+      <span class="clock-port">HAM</span>
+      <span id="clock">--:--:--</span>
+    </div>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">AUTO</button>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main class="post">
+    <a class="post-back" href="../index.html#log-dispatches">← ALL DISPATCHES</a>
+
+    <div class="post-head">
+      <p class="post-eyebrow">DISPATCH · TV PLATFORM · 6 MIN READ</p>
+      <h1 class="post-title">Sixty Frames on a Cabin TV</h1>
+      <p class="post-meta">SHIVA KRISHNA DONTHI · 2026</p>
+    </div>
+
+    <article class="post-body">
+      <p>xtv-platform is the TV side of what we build at Xcontrol: the guest-facing apps running on the panels in cabins and hotel rooms. Channel rails, program guides, service menus, the interface a guest meets when they pick up the remote. Under the vendor wrappers they're web apps, and for years they were built the way web apps are built: components rendering into the DOM.</p>
+
+      <p>On a developer laptop that's fine. On the actual panel it never quite was. Rails stuttered when you scrolled them. Remote presses landed with a visible delay. Boot was long enough that guests pressed the button twice. Nobody had filed a ticket called "the platform feels cheap", and no migration was on the roadmap. I put it there.</p>
+
+      <h2>The problem was the DOM itself</h2>
+
+      <p>A hospitality panel is not a laptop. It's a low-power SoC running a Chromium build that's often years old, with a fraction of the CPU and memory a phone gets. Every DOM mutation drags the full pipeline behind it: style recalculation, layout, paint, composite. A poster rail with a few dozen tiles animating at once asks that pipeline to run per frame, and the panel simply can't. You can virtualise, you can throttle, you can <code>will-change</code> your way to small wins, and we did. The ceiling stays where the DOM put it.</p>
+
+      <p><a href="https://lightningjs.io/">Lightning Blits</a> takes the pipeline out of the equation. It's the app framework on top of Lightning 3, the open-source renderer Comcast built for exactly this class of device. Components are declarative templates with reactive props, so the developer experience feels familiar, but nothing renders to the DOM. The whole UI is a WebGL scene graph: textures on a canvas, animated on the GPU. No layout, no reflow, no style recalculation, ever.</p>
+
+      <h2>Nobody asked for a prototype, so I built one</h2>
+
+      <p>Arguments about frameworks go nowhere; demos on real hardware end them. I took our heaviest screen, the channel rail with live poster art, and rebuilt it in Blits. Same data, same design, same panel. Then I put the two versions side by side in front of the team and handed someone the remote.</p>
+
+      <p>The DOM version did what it always did: dropped frames on every scroll, hesitated on every keypress. The Blits version tracked the remote like a native app. The numbers, measured on the panel and not on anyone's laptop:</p>
+
+      <figure class="flow"><pre>METRIC              DOM APP          BLITS PROTOTYPE
+cold boot           ~8 s             ~2.5 s
+rail scroll         janky            steady 60 fps
+JS heap after nav   ~190 MB          ~75 MB</pre>
+        <figcaption>MEASURED ON THE TARGET PANEL, SAME DATA, SAME SCREEN.</figcaption>
+      </figure>
+
+      <p>That meeting ended with the migration on the roadmap. Not because anyone loved the idea of rewriting working screens, but because the gap was too large to defend keeping.</p>
+
+      <h2>Widgets first, screens second</h2>
+
+      <p>A migration where every developer learns WebGL texture management from scratch dies in the first sprint. So before any screen moved, I built the widget kit: the reusable Blits components that encode the hard-won TV knowledge once, so building a screen becomes assembly.</p>
+
+      <ul>
+        <li><strong>Focus-aware rails and grids.</strong> Spatial navigation, wrap rules, and scroll physics handled inside the widget. A screen declares what's in the rail; the widget decides how the remote moves through it.</li>
+        <li><strong>Poster tiles with texture discipline.</strong> Lazy texture upload as tiles approach the viewport, release when they leave. GPU texture memory is the real budget on a panel, and the widget enforces it so screens can't leak.</li>
+        <li><strong>Video surface.</strong> WebGL draws over the native video plane, so live TV is a punch-through: a transparent hole in the canvas with the tuner behind it. One widget owns that trick; nobody else has to know it exists.</li>
+        <li><strong>On-screen keyboard, toasts, dialogs.</strong> The unglamorous furniture every screen needs, focus-managed and themed once.</li>
+        <li><strong>Theme tokens.</strong> Same design tokens across old and new screens, so the migration is invisible to guests while it's in flight.</li>
+      </ul>
+
+      <p>With the kit in place the migration ran as a strangler: screen by screen, new Blits screens shipping alongside remaining DOM ones, always a rollback path. Each converted screen inherited the performance profile for free, because the widgets carry it.</p>
+
+      <h2>Measured where guests actually watch</h2>
+
+      <p>Every number above came off real panels, not desktop Chrome, and staying honest about that is its own discipline. This is the same itch that later became <a href="building-tv-mcp.html">tv-mcp</a>: the loop of installing on a physical TV, screenshotting it, reading its console, and evaluating state inside the running app, without walking to the screen. Measure on the device the guest holds the remote for. Desktop numbers on TV projects are fiction.</p>
+
+      <h2>What the migration taught me</h2>
+
+      <ul>
+        <li>Initiative is a prototype, not a proposal. One rebuilt screen on real hardware did what no slide deck could.</li>
+        <li>Platform migrations scale through shared components, not documentation. Encode the hard knowledge in widgets and the tenth screen costs a fraction of the first.</li>
+        <li>On constrained devices, the rendering model is the performance ceiling. Optimising inside the wrong model is polishing a bottleneck.</li>
+        <li>Keep the old path alive until the new one has earned its keep. Strangler beats big bang, on ships especially.</li>
+      </ul>
+
+      <p>If you're building UIs for TVs, set-top boxes, or anything else where the hardware fights back, I'd be glad to compare notes: <a href="mailto:skdonthi@outlook.com">email</a> or <a href="https://linkedin.com/in/skdonthi">LinkedIn</a>.</p>
+    </article>
+
+    <div class="post-foot">
+      <a href="../index.html#log-dispatches">← ALL DISPATCHES</a>
+      <a href="../index.html#log-contact">OPEN A CHANNEL →</a>
+    </div>
+  </main>
+
+  <footer class="foot mono">
+    <span>© 2026 · SHIVA KRISHNA DONTHI</span>
+  </footer>
+
+  <script src="../harbor.js"></script>
+</body>
+
+</html>

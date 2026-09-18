@@ -248,6 +248,9 @@
               on requirements and rollout plans, bridging deep technical work with real-world operator needs.</li>
             <li>Implemented offline-first architecture with sync queues and local inference fallback, ensuring zero
               data loss and continued operation through multi-hour satellite outages.</li>
+            <li>Took the initiative to migrate xtv-platform's guest-facing TV apps from DOM rendering to Lightning
+              Blits (WebGL): built the proving prototype and the shared widget kit, taking cabin-TV UIs from janky
+              scrolling to a steady 60 fps on real panels.</li>
             <li>Secured end-to-end pipelines via JWT/OIDC passthrough from Spring Boot identity services into
               distributed AI inference nodes.</li>
           </ul>
@@ -411,6 +414,13 @@
         <h3>AI Systems That Run at Sea</h3>
         <p>Deploying LLM pipelines aboard cruise ships taught me things no cloud architecture blog ever will.
           Connectivity is a lie. Latency is religion. And your IT team is probably also the chef's assistant.</p>
+        <span class="d-link mono">READ →</span>
+      </a>
+      <a class="dispatch" href="blog/xtv-blits.html">
+        <div class="d-meta mono"><span>TV PLATFORM</span><span>6 MIN</span></div>
+        <h3>Sixty Frames on a Cabin TV</h3>
+        <p>Nobody put the Lightning Blits migration on the roadmap, so I built the prototype that did. The widget
+          kit, the strangler rollout, and the on-device numbers that ended the framework debate.</p>
         <span class="d-link mono">READ →</span>
       </a>
       <a class="dispatch" href="blog/building-tv-mcp.html">

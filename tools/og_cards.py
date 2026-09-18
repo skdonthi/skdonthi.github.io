@@ -121,6 +121,8 @@ def card(slug, eyebrow, title_lines, accent_line_idx=None):
 
 card("default", "Applied AI Engineer · Hamburg",
      ["Discover. Design.", "Build. Ship."], accent_line_idx=1)
+card("xtv-blits", "Dispatch · TV Platform",
+     ["Sixty frames", "on a cabin TV"])
 card("building-tv-mcp", "Dispatch · Developer Tools",
      ["Teaching an AI agent", "to hold the remote"])
 card("at-sea", "Dispatch · Maritime AI",
