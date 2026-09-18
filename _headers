@@ -1,0 +1,17 @@
+# Cloudflare Pages headers. Personal site: no indexing, no AI training.
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive, noimageindex, noai, noimageai
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+/assets/*
+  Cache-Control: public, max-age=86400
+
+/*.css
+  Cache-Control: public, max-age=3600
+
+/*.js
+  Cache-Control: public, max-age=3600
