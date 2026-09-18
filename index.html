@@ -4,22 +4,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
   <title>Shiva Krishna Donthi · Applied AI Engineer</title>
   <meta name="description"
-    content="Shiva Krishna Donthi. Applied AI engineer building multi-agent systems that run aboard cruise ships. Fullstack roots, Hamburg based." />
+    content="Shiva Krishna Donthi. Applied AI engineer with ten years of fullstack across e-commerce, insurance and maritime. Building multi-agent systems that run aboard cruise ships. Hamburg." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Shiva Krishna Donthi · Applied AI Engineer" />
-  <meta property="og:description" content="Shiva Krishna Donthi. Applied AI engineer building multi-agent systems that run aboard cruise ships. Fullstack roots, Hamburg based." />
-  <meta property="og:url" content="https://skdonthi.github.io/" />
-  <meta property="og:image" content="https://skdonthi.github.io/assets/og/default.png" />
+  <meta property="og:description" content="Applied AI engineer with ten years of fullstack across e-commerce, insurance and maritime. Building multi-agent systems that run aboard cruise ships. Hamburg." />
+  <meta property="og:url" content="https://donthi.dev/" />
+  <link rel="canonical" href="https://donthi.dev/" />
+  <meta property="og:image" content="https://donthi.dev/assets/og/default.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#050d14" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,500;10..72,700;10..72,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,700;10..72,800&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@1&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="harbor.css" />
   <script>
@@ -36,459 +40,581 @@
 
 <body>
 
-  <!-- NAV -->
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-ring"><span class="cursor-label" id="cursor-label"></span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- TOP BAR -->
   <header class="topbar" id="topbar">
-    <a href="#top" class="brand">SK<span class="brand-slash">/</span>DONTHI</a>
-    <nav class="topnav" id="topnav">
-      <a href="#log-about"><span class="nav-idx">01</span> ABOUT</a>
-      <a href="#log-principles"><span class="nav-idx">02</span> PRINCIPLES</a>
-      <a href="#log-voyage"><span class="nav-idx">03</span> VOYAGE</a>
-      <a href="#log-stack"><span class="nav-idx">04</span> STACK</a>
-      <a href="#log-dispatches"><span class="nav-idx">05</span> DISPATCHES</a>
-      <a href="#log-contact" class="nav-contact"><span class="nav-idx">06</span> CONTACT</a>
+    <a href="#top" class="brand" data-cursor="TOP">DONTHI<span class="brand-dot">.</span>DEV</a>
+    <nav class="topnav" aria-label="Sections">
+      <a href="#log-about"><span class="nav-idx">01</span>ABOUT</a>
+      <a href="#log-voyage"><span class="nav-idx">02</span>VOYAGE</a>
+      <a href="#log-ports"><span class="nav-idx">03</span>PORTS</a>
+      <a href="#log-dispatches"><span class="nav-idx">04</span>DISPATCHES</a>
+      <a href="#log-contact" class="nav-contact"><span class="nav-idx">05</span>CONTACT</a>
     </nav>
     <div class="ship-clock mono" aria-label="Hamburg local time">
-      <span class="clock-port">HAM</span>
-      <span id="clock">--:--:--</span>
+      <span class="clock-port">HAM</span><span data-clock>--:--:--</span>
     </div>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">AUTO</button>
-    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme" data-cursor="THEME">AUTO</button>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-cursor="MENU">
+      <span class="menu-text">MENU</span>
+      <span class="menu-lines" aria-hidden="true"><span></span><span></span></span>
     </button>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="chart" aria-hidden="true">
-      <svg class="chart-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
-        <!-- depth contours -->
-        <path class="contour" d="M-50,700 C200,640 380,760 620,690 S1050,600 1490,680" />
-        <path class="contour" d="M-50,780 C240,720 420,830 680,770 S1100,690 1490,760" />
-        <path class="contour" d="M-50,860 C280,810 460,900 740,850 S1150,780 1490,845" />
-        <path class="contour faint" d="M-50,560 C260,520 480,610 760,560 S1180,480 1490,555" />
-        <!-- plotted route -->
-        <path class="route" id="route-path" d="M120,830 L340,640 L560,700 L850,430 L1120,470 L1330,210" />
-        <g class="fixes">
-          <circle cx="120" cy="830" r="5" /><circle cx="340" cy="640" r="5" />
-          <circle cx="560" cy="700" r="5" /><circle cx="850" cy="430" r="5" />
-          <circle cx="1120" cy="470" r="5" /><circle cx="1330" cy="210" r="6" class="fix-now" />
-        </g>
-        <!-- compass rose -->
-        <g class="rose" transform="translate(1230,660)">
-          <circle r="70" /><circle r="52" />
-          <line x1="0" y1="-70" x2="0" y2="70" /><line x1="-70" y1="0" x2="70" y2="0" />
-          <line x1="-49" y1="-49" x2="49" y2="49" /><line x1="-49" y1="49" x2="49" y2="-49" />
-          <text x="0" y="-80" text-anchor="middle">N</text>
-        </g>
-      </svg>
-      <!-- scattered chart annotations -->
-      <span class="annot mono" style="top:18%;left:46%">RAG_PIPELINE</span>
-      <span class="annot mono" style="top:30%;left:72%">EMBEDDINGS</span>
-      <span class="annot mono" style="top:52%;left:58%">53.55°N 9.99°E</span>
-      <span class="annot mono" style="top:64%;left:81%">MCP</span>
-      <span class="annot mono" style="top:70%;left:48%">sounding 14.6</span>
-      <span class="annot mono" style="top:40%;left:88%">LANGGRAPH</span>
-      <span class="annot mono" style="top:46%;left:70%">SAT_LINK · 300ms</span>
-      <span class="annot mono" style="top:24%;left:60%">AGENT_LOOP</span>
-      <span class="annot mono" style="top:64%;left:62%">offline_first</span>
-      <span class="annot mono" style="top:12%;left:76%">NMEA 0183</span>
+  <!-- MENU OVERLAY -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu-inner">
+      <nav class="menu-nav" aria-label="Menu">
+        <a href="#log-about"><span class="m-idx">01</span>ABOUT<span class="m-aside">who's aboard</span></a>
+        <a href="#log-principles"><span class="m-idx">02</span>PRINCIPLES<span class="m-aside">standing orders</span></a>
+        <a href="#log-voyage"><span class="m-idx">03</span>VOYAGE<span class="m-aside">Hyderabad → Hamburg, five waypoints</span></a>
+        <a href="#log-ports"><span class="m-idx">04</span>PORTS OF CALL<span class="m-aside">three domains, one method</span></a>
+        <a href="#log-stack"><span class="m-idx">05</span>STACK<span class="m-aside">instruments and cargo</span></a>
+        <a href="#log-dispatches"><span class="m-idx">06</span>DISPATCHES<span class="m-aside">notes from the engine room</span></a>
+        <a href="#log-contact"><span class="m-idx">07</span>CONTACT<span class="m-aside">open a channel</span></a>
+      </nav>
+      <div class="menu-rule" aria-hidden="true"></div>
+      <aside class="menu-side">
+        <div>
+          <p class="ms-label">Hamburg · local time</p>
+          <p class="menu-clock" data-clock="split">--:--<span class="sec">:--</span></p>
+          <p class="menu-coords">53.55°N 9.99°E · UTC+2</p>
+        </div>
+        <div>
+          <p class="ms-label">Channels</p>
+          <ul class="menu-links">
+            <li><a href="https://linkedin.com/in/skdonthi" target="_blank" rel="noopener">LinkedIn<span>/in/skdonthi ↗</span></a></li>
+            <li><a href="https://github.com/skdonthi" target="_blank" rel="noopener">GitHub<span>/skdonthi ↗</span></a></li>
+            <li><a href="#log-contact" data-mail>Email<span>open a channel ↗</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="ms-label">Chart</p>
+          <div class="seg" role="group" aria-label="Theme">
+            <button type="button" data-theme-set="system" aria-pressed="false">Auto</button>
+            <button type="button" data-theme-set="light" aria-pressed="false">Day</button>
+            <button type="button" data-theme-set="dark" aria-pressed="false">Night</button>
+          </div>
+        </div>
+        <svg class="menu-route" viewBox="0 0 424 120" aria-hidden="true">
+          <path d="M8,104 L96,64 L168,84 L262,30 L340,44 L410,12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 6" style="color:var(--signal);opacity:.7" />
+          <g fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--signal)">
+            <circle cx="8" cy="104" r="4" /><circle cx="96" cy="64" r="4" /><circle cx="168" cy="84" r="4" /><circle cx="262" cy="30" r="4" /><circle cx="340" cy="44" r="4" />
+          </g>
+          <circle cx="410" cy="12" r="5" fill="currentColor" style="color:var(--signal)" />
+        </svg>
+      </aside>
     </div>
-
-    <div class="hero-inner">
-      <p class="hero-eyebrow mono"><span class="tick"></span>CURRENTLY · BUILDING AGENTS FOR SHIPS AT SEA</p>
-      <h1 class="hero-verbs">
-        <span class="verb v1">DISCOVER.</span>
-        <span class="verb v2 outline">DESIGN.</span>
-        <span class="verb v3">BUILD.</span>
-        <span class="verb v4 signal">SHIP.</span>
-      </h1>
-      <p class="hero-tagline">Applied AI engineer with ten years of fullstack behind me, building multi-agent
-        systems that run aboard cruise ships, where the cloud is 300&nbsp;ms away on a good day.</p>
-    </div>
-
-    <div class="hero-meta mono">
-      <div><span class="meta-k">ROLE</span><span class="meta-v">APPLIED AI ENGINEER</span></div>
-      <div><span class="meta-k">FOCUS</span><span class="meta-v">AI · FULLSTACK · AGENTS</span></div>
-      <div><span class="meta-k">PORT</span><span class="meta-v">HAMBURG · 53.55°N</span></div>
-      <div><span class="meta-k">STATUS</span><span class="meta-v status-open"><span class="dot"></span>OPEN TO
-          CONVERSATIONS</span></div>
-    </div>
-    <p class="scroll-hint mono">SCROLL TO EXPLORE ↓</p>
-  </section>
-
-  <!-- MANIFEST MARQUEE -->
-  <div class="manifest" aria-hidden="true">
-    <div class="manifest-track mono">
-      <span>LANGGRAPH</span><span>MCP</span><span>RAG</span><span>QDRANT</span><span>ANGULAR</span>
-      <span>SPRING BOOT</span><span>NODE.JS</span><span>KUBERNETES</span><span>REDIS STREAMS</span>
-      <span>POSTGRESQL</span><span>TYPESCRIPT</span><span>MARITIME SAAS</span><span>OFFLINE-FIRST</span>
+    <div class="menu-marquee" aria-hidden="true">
+      <div class="manifest-track">
+        <span>LANGGRAPH</span><span>MCP</span><span>RAG</span><span>QDRANT</span><span>ANGULAR</span><span>SPRING BOOT</span>
+        <span>NODE.JS</span><span>KUBERNETES</span><span>REDIS STREAMS</span><span>NESTJS</span><span>MARITIME SAAS</span>
+      </div>
     </div>
   </div>
 
-  <!-- MY COMPASS -->
-  <section class="compass-quote" aria-label="My compass">
-    <p class="cq-label mono">MY COMPASS</p>
-    <p class="cq-text"><span class="cq-dim">I don't fall in love with ideas.</span><br />
-      I fall in love with solving <em>the customer's problem.</em></p>
-  </section>
+  <main id="top">
 
-  <!-- LOG 01 · ABOUT -->
-  <section class="log" id="log-about">
-    <div class="log-head mono">LOG 01 · WHO'S ABOARD</div>
-    <div class="about-grid">
-      <div class="about-text">
-        <h2 class="log-title">CUSTOMER-FIRST ENGINEER<br /><em>WHO LEARNED TO SHIP.</em></h2>
-        <p>A decade in product engineering taught me that great software starts with the people using it, not the
-          framework you pick. I bring that same discipline to AI: understand the operator, the domain, and the
-          workflow first; choose the model and the stack second.</p>
-        <p>At Xcontrol I sit aboard vessels with customers before I write a line of code. I run discovery sessions
-          with cruise line operators and ship IT crews, capture what actually breaks in daily operations, and
-          translate that into product specs the team can build against, then into AI features that fit the workflow
-          rather than the demo reel.</p>
-        <p>I hold a high bar for what production means: observable, resilient, explainable, and fast enough that no
-          one reaches for the spreadsheet instead. I'm newer to applied AI than I am to product engineering, and I
-          treat that as an advantage. I ship AI the way I've shipped products for ten years: small, useful, and
-          accountable to the customer.</p>
-        <div class="langs mono">
-          <span>ENGLISH · PROFESSIONAL</span><span>TELUGU · NATIVE</span>
-          <span>HINDI · NATIVE</span><span>GERMAN · WORKING</span>
+    <!-- HERO · pinned verbs -->
+    <section class="hero" id="hero" aria-label="Introduction">
+      <div class="hero-pin">
+        <div class="chart" aria-hidden="true">
+          <div class="radar"></div>
+          <svg class="chart-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+            <path class="contour" d="M-50,690 C200,630 380,750 620,680 S1050,590 1490,670" style="opacity:.5" />
+            <path class="contour" d="M-50,770 C240,710 420,820 680,760 S1100,680 1490,750" style="opacity:.38" />
+            <path class="contour" d="M-50,850 C280,800 460,890 740,840 S1150,770 1490,835" style="opacity:.26" />
+            <path class="contour" d="M-50,540 C260,500 480,590 760,540 S1180,460 1490,535" style="opacity:.2" />
+            <circle class="ring" cx="1130" cy="520" r="210" /><circle class="ring" cx="1130" cy="520" r="140" /><circle class="ring" cx="1130" cy="520" r="70" />
+            <line class="ring" x1="920" y1="520" x2="1340" y2="520" /><line class="ring" x1="1130" y1="310" x2="1130" y2="730" />
+            <path class="route" pathLength="1" d="M120,830 L340,640 L560,700 L850,430 L1130,520 L1330,210" />
+            <g class="fixes">
+              <circle cx="120" cy="830" r="5" /><circle cx="340" cy="640" r="5" /><circle cx="560" cy="700" r="5" />
+              <circle cx="850" cy="430" r="5" /><circle cx="1130" cy="520" r="5" />
+            </g>
+            <circle class="fix-now" cx="1330" cy="210" r="6" />
+            <circle class="fix-halo" cx="1330" cy="210" r="24" />
+          </svg>
+          <span class="annot" style="top:14%;left:44%">AGENT_LOOP</span>
+          <span class="annot" style="top:12%;left:70%">NMEA 0183</span>
+          <span class="annot" style="top:40%;left:84%">SAT_LINK · 300 MS</span>
+          <span class="annot" style="top:42%;left:66%">53.55°N 9.99°E</span>
+          <span class="annot" style="top:52%;left:93%">MCP</span>
+          <span class="annot" style="top:62%;left:89%">LANGGRAPH</span>
+          <span class="annot" style="top:67%;left:62%">SOUNDING 14.6</span>
+          <span class="annot" style="top:74%;left:75%">NESTJS</span>
         </div>
-      </div>
-      <aside class="about-stats">
-        <div class="stat"><span class="stat-num">10+</span><span class="stat-label mono">YEARS ENGINEERING</span></div>
-        <div class="stat"><span class="stat-num">5+</span><span class="stat-label mono">YEARS AT XCONTROL</span></div>
-        <div class="stat"><span class="stat-num">∞</span><span class="stat-label mono">AGENT LOOPS DEPLOYED</span></div>
-        <div class="stat"><span class="stat-num">1</span><span class="stat-label mono">DOMAIN: AI AT SEA</span></div>
-      </aside>
-    </div>
-  </section>
 
-  <!-- LOG 02 · PRINCIPLES -->
-  <section class="log" id="log-principles">
-    <div class="log-head mono">LOG 02 · OPERATING PRINCIPLES</div>
-    <h2 class="log-title">STANDING ORDERS.</h2>
-    <div class="principles">
-      <div class="principle">
-        <span class="p-idx mono">P-01</span>
-        <h3>Be obsessed with your customer</h3>
-        <p>I run discovery sessions with operators before writing a line of code. Real problems, not assumed ones,
-          drive every architecture decision.</p>
-      </div>
-      <div class="principle">
-        <span class="p-idx mono">P-02</span>
-        <h3>Raise the bar</h3>
-        <p>Flakiness is a blocker, not an edge case. I hold production to a standard where observable, resilient, and
-          fast are non-negotiable minimums.</p>
-      </div>
-      <div class="principle">
-        <span class="p-idx mono">P-03</span>
-        <h3>Better together</h3>
-        <p>The best outcomes come from engineering, operations, and customers in the same conversation. I work to
-          close that gap, not widen it.</p>
-      </div>
-      <div class="principle">
-        <span class="p-idx mono">P-04</span>
-        <h3>Act as an owner</h3>
-        <p>I take end-to-end responsibility: from requirements through deployment, onboarding ship IT teams, and
-          staying available when things break at sea.</p>
-      </div>
-      <div class="principle">
-        <span class="p-idx mono">P-05</span>
-        <h3>Find joy in what you do</h3>
-        <p>Whether debugging an agent loop or explaining RAG to a crew member who's never heard of an LLM, I find the
-          work genuinely worth doing.</p>
-      </div>
-      <div class="principle principle-open" id="open-principle">
-        <span class="p-idx mono signal-text">P-06</span>
-        <div id="open-principle-view">
-          <h3 id="open-principle-title">Your principle</h3>
-          <p id="open-principle-desc">What value matters most to your team? Click to add it. I'm here to adapt, grow,
-            and build around what makes your organisation excellent.</p>
+        <div class="hero-byline">
+          <h1 class="hero-name">Shiva Krishna Donthi</h1>
+          <p class="hero-status"><span class="dot" aria-hidden="true"></span>Currently · fullstack + agents for ships at sea</p>
         </div>
-        <div class="open-edit" id="open-principle-edit" hidden>
-          <input id="open-input-title" class="open-input mono" maxlength="48" placeholder="PRINCIPLE NAME…" />
-          <textarea id="open-input-desc" class="open-input mono" maxlength="180" rows="3"
-            placeholder="What it means in practice…"></textarea>
-          <div class="open-actions">
-            <button class="open-save mono" id="open-save">SAVE</button>
-            <button class="open-cancel mono" id="open-cancel">CANCEL</button>
+
+        <div class="hero-stage">
+          <p class="hero-verbs" aria-label="Discover. Design. Build. Ship.">
+            <span class="verb" data-state="active">DISCOVER<span class="dot-mark">.</span></span>
+            <span class="verb" data-state="next">DESIGN<span class="dot-mark">.</span></span>
+            <span class="verb" data-state="next">BUILD<span class="dot-mark">.</span></span>
+            <span class="verb" data-state="next">SHIP<span class="dot-mark">.</span></span>
+          </p>
+          <div class="hero-rail" aria-hidden="true">
+            <div class="rail-line"><div class="rail-fill"></div></div>
+            <ol class="rail-list">
+              <li class="on"><span>01</span><span class="rail-fix"></span>DISCOVER</li>
+              <li><span>02</span><span class="rail-fix"></span>DESIGN</li>
+              <li><span>03</span><span class="rail-fix"></span>BUILD</li>
+              <li><span>04</span><span class="rail-fix"></span>SHIP</li>
+            </ol>
+          </div>
+          <div class="verb-caps">
+            <p class="verb-cap on">Sit aboard the vessel with the operator <em>before</em> writing a line of code.</p>
+            <p class="verb-cap">The constraint is the spec: <em>latency, connectivity, tenancy, regulation.</em></p>
+            <p class="verb-cap">Observable, explainable, resilient by default. <em>Flakiness is a blocker.</em></p>
+            <p class="verb-cap">Small, behind flags, measured inside the operator's workflow. <em>Then stay for what breaks.</em></p>
           </div>
         </div>
+
+        <div class="hero-bottom">
+          <div>
+            <p class="hero-tagline">Applied AI engineer with ten years of fullstack across e-commerce, insurance and maritime. Now building multi-agent systems aboard cruise ships, <span class="serif">where the cloud is 300&nbsp;ms away on a good day.</span></p>
+            <p class="scroll-hint mono"><span>Scroll</span><span class="scroll-line" aria-hidden="true"></span></p>
+          </div>
+          <dl class="hero-meta mono">
+            <div><dt>Role</dt><dd>Applied AI Engineer</dd></div>
+            <div><dt>Ports of call</dt><dd>Commerce · Insurance · Maritime</dd></div>
+            <div><dt>Port</dt><dd>Hamburg · 53.55°N</dd></div>
+            <div><dt>Status</dt><dd class="status-open"><span class="dot" aria-hidden="true"></span>Open to talk</dd></div>
+          </dl>
+        </div>
+
+        <p class="hero-side" aria-hidden="true">Applied AI engineer · Hamburg · since 2015</p>
+      </div>
+    </section>
+
+    <!-- MANIFEST MARQUEE -->
+    <div class="manifest" aria-hidden="true">
+      <div class="manifest-track">
+        <span>LANGGRAPH</span><span>MCP</span><span>RAG</span><span>QDRANT</span><span>ANGULAR</span>
+        <span>SPRING BOOT</span><span>NODE.JS</span><span>KUBERNETES</span><span>REDIS STREAMS</span>
+        <span>POSTGRESQL</span><span>TYPESCRIPT</span><span>NESTJS</span><span>MARITIME SAAS</span>
       </div>
     </div>
-  </section>
 
-  <!-- LOG 03 · VOYAGE -->
-  <section class="log" id="log-voyage">
-    <div class="log-head mono">LOG 03 · VOYAGE LOG</div>
-    <h2 class="log-title">HYDERABAD → HAMBURG,<br /><em>ONE WAYPOINT AT A TIME.</em></h2>
+    <!-- COMPASS · pinned statement -->
+    <section class="compass" id="compass" aria-label="My compass">
+      <div class="compass-pin">
+        <div class="compass-rose" aria-hidden="true">
+          <svg viewBox="0 0 800 800">
+            <g fill="none" stroke="currentColor" stroke-width="1" style="color:var(--line-strong);opacity:.6">
+              <circle cx="400" cy="400" r="380" /><circle cx="400" cy="400" r="320" /><circle cx="400" cy="400" r="210" /><circle cx="400" cy="400" r="80" />
+              <line x1="400" y1="0" x2="400" y2="800" /><line x1="0" y1="400" x2="800" y2="400" />
+              <line x1="131" y1="131" x2="669" y2="669" /><line x1="131" y1="669" x2="669" y2="131" />
+            </g>
+            <g stroke="currentColor" stroke-width="1.5" style="color:var(--line-strong)">
+              <line x1="400" y1="20" x2="400" y2="44" /><line x1="780" y1="400" x2="756" y2="400" /><line x1="400" y1="780" x2="400" y2="756" /><line x1="20" y1="400" x2="44" y2="400" />
+            </g>
+            <line class="needle" x1="400" y1="400" x2="600" y2="90" stroke="currentColor" stroke-width="1.5" style="color:var(--signal);opacity:.6" />
+            <circle cx="400" cy="400" r="5" fill="currentColor" style="color:var(--signal)" />
+          </svg>
+        </div>
+        <p class="cq-label mono">My compass</p>
+        <p class="cq-line dimmed">If it doesn't survive production,</p>
+        <p class="cq-line">it was <span class="serif">just a demo.</span></p>
+        <div class="cq-foot mono">
+          <div class="cq-progress"><span>Heading</span><span class="bar"><span></span></span></div>
+          <span>53.55°N 9.99°E</span>
+        </div>
+      </div>
+    </section>
 
-    <div class="voyage">
-
-      <article class="waypoint current">
-        <div class="wp-marker" aria-hidden="true"><span class="wp-fix"></span></div>
-        <div class="wp-card">
-          <div class="wp-top mono">
-            <span class="wp-id">WP-05 · HAMBURG · 53.55°N 9.99°E</span>
-            <span class="wp-date"><span class="wp-now">UNDERWAY</span> MAR 2025 - PRESENT</span>
-          </div>
-          <h3>Applied AI Engineer <span class="wp-org">· Xcontrol GmbH</span></h3>
-          <ul>
-            <li>Run discovery sessions directly with cruise line operators before writing a line of code, translating
-              real operational pain into precise AI product specs that the team actually builds against.</li>
-            <li>Built multi-agent orchestration pipelines using LangGraph + MCP, holding a production bar where
-              flakiness is a blocker: agents self-select tools, delegate subtasks, and recover from failures without
-              human intervention.</li>
-            <li>Took end-to-end ownership of AI deployments aboard vessels: infrastructure setup, onboarding ship IT
-              staff, authoring runbooks for self-sufficient operation, and staying available when things break
-              mid-ocean.</li>
-            <li>Designed agent memory via Redis Streams and per-tenant vector persistence so agents continuously
-              improve from each customer interaction without retraining cycles.</li>
-            <li>Collaborated across Xcontrol engineering, cruise line operations, and third-party vessel IT to align
-              on requirements and rollout plans, bridging deep technical work with real-world operator needs.</li>
-            <li>Implemented offline-first architecture with sync queues and local inference fallback, ensuring zero
-              data loss and continued operation through multi-hour satellite outages.</li>
-            <li>Took the initiative to migrate xtv-platform's guest-facing TV apps from DOM rendering to Lightning
-              Blits (WebGL): built the proving prototype and the shared widget kit, taking cabin-TV UIs from janky
-              scrolling to a steady 60 fps on real panels.</li>
-            <li>Secured end-to-end pipelines via JWT/OIDC passthrough from Spring Boot identity services into
-              distributed AI inference nodes.</li>
+    <!-- LOG 01 · ABOUT -->
+    <section class="log" id="log-about">
+      <span class="ghost" aria-hidden="true">01</span>
+      <p class="log-head mono">Log 01 · Who's aboard</p>
+      <div class="about-grid">
+        <h2 class="log-title">FULLSTACK ROOTS.<br />AGENTS IN PROD.<br />I OWN WHAT I <span class="serif">ship.</span></h2>
+        <div class="about-text">
+          <p class="words">A decade in product engineering taught me that great software starts with <span class="serif">the people using it,</span> not the framework you pick. I bring the same discipline to AI: understand the operator, the domain and the workflow first. Choose the model and the stack second.</p>
+          <p>At Xcontrol I sit aboard vessels with the crews who will run the system before I write a line of code. Discovery with operators and ship IT becomes the spec, then AI features that fit the workflow rather than the demo reel.</p>
+          <p>The domain has changed three times, from e-commerce platforms to reinsurance analytics to ships at sea. The method has not: production means observable, resilient, explainable, and fast enough that no one reaches for the spreadsheet instead.</p>
+          <ul class="langs mono">
+            <li>English · professional</li><li>Telugu · native</li><li>Hindi · native</li><li>German · working</li>
           </ul>
-          <div class="wp-tags mono">
-            <span>LANGGRAPH</span><span>MCP</span><span>RAG</span><span>QDRANT</span><span>REDIS</span>
-            <span>KUBERNETES</span><span>JWT</span><span>MARITIME SAAS</span>
+        </div>
+      </div>
+      <dl class="stats">
+        <div class="stat"><dd class="stat-num">10<sup>+</sup></dd><dt class="stat-label mono">Years engineering</dt></div>
+        <div class="stat"><dd class="stat-num">5<sup>+</sup></dd><dt class="stat-label mono">Years at Xcontrol</dt></div>
+        <div class="stat"><dd class="stat-num">4</dd><dt class="stat-label mono">Languages spoken</dt></div>
+        <div class="stat"><dd class="stat-num">3</dd><dt class="stat-label mono">Domains · commerce, insurance, maritime</dt></div>
+      </dl>
+    </section>
+
+    <!-- LOG 02 · PRINCIPLES -->
+    <section class="log" id="log-principles">
+      <p class="log-head mono">Log 02 · Standing orders</p>
+      <h2 class="log-title">HOW I <span class="serif">work.</span></h2>
+      <div class="principles">
+        <div class="principle">
+          <span class="p-idx mono">P-01</span>
+          <h3>Be obsessed with your customer</h3>
+          <p>I run discovery sessions with operators before writing a line of code. Real problems, not assumed ones, drive every architecture decision.</p>
+        </div>
+        <div class="principle">
+          <span class="p-idx mono">P-02</span>
+          <h3>Raise the bar</h3>
+          <p>Flakiness is a blocker, not an edge case. I hold production to a standard where observable, resilient, and fast are non-negotiable minimums.</p>
+        </div>
+        <div class="principle">
+          <span class="p-idx mono">P-03</span>
+          <h3>Better together</h3>
+          <p>The best outcomes come from engineering, operations, and customers in the same conversation. I work to close that gap, not widen it.</p>
+        </div>
+        <div class="principle">
+          <span class="p-idx mono">P-04</span>
+          <h3>Act as an owner</h3>
+          <p>I take end-to-end responsibility: from requirements through deployment, onboarding ship IT teams, and staying available when things break at sea.</p>
+        </div>
+        <div class="principle">
+          <span class="p-idx mono">P-05</span>
+          <h3>Find joy in what you do</h3>
+          <p>Whether debugging an agent loop or explaining RAG to a crew member who's never heard of an LLM, I find the work genuinely worth doing.</p>
+        </div>
+        <div class="principle principle-open" id="open-principle" data-cursor="EDIT">
+          <span class="p-idx mono">P-06</span>
+          <div id="open-principle-view">
+            <h3 id="open-principle-title">Your principle</h3>
+            <p id="open-principle-desc">What value matters most to your team? Click to add it. I'm here to adapt, grow, and build around what makes your organisation excellent.</p>
+          </div>
+          <div class="open-edit" id="open-principle-edit" hidden>
+            <label class="mono" for="open-input-title" hidden>Principle name</label>
+            <input id="open-input-title" class="open-input" maxlength="48" placeholder="PRINCIPLE NAME…" />
+            <label class="mono" for="open-input-desc" hidden>What it means</label>
+            <textarea id="open-input-desc" class="open-input" maxlength="180" rows="3" placeholder="What it means in practice…"></textarea>
+            <div class="open-actions">
+              <button class="open-save mono" id="open-save" type="button">Save</button>
+              <button class="open-cancel mono" id="open-cancel" type="button">Cancel</button>
+            </div>
           </div>
         </div>
-      </article>
+      </div>
+    </section>
 
-      <article class="waypoint">
-        <div class="wp-marker" aria-hidden="true"><span class="wp-fix"></span></div>
-        <div class="wp-card">
-          <div class="wp-top mono">
-            <span class="wp-id">WP-04 · HAMBURG · 53.55°N 9.99°E</span>
-            <span class="wp-date">AUG 2021 - SEP 2025</span>
+    <!-- LOG 03 · VOYAGE (horizontal) -->
+    <section class="log voyage-section" id="log-voyage">
+      <div class="voyage-pin">
+        <div class="voyage-head">
+          <div>
+            <p class="log-head mono">Log 03 · Voyage log</p>
+            <h2 class="log-title">HYDERABAD → HAMBURG, <span class="serif">one waypoint at a time.</span></h2>
           </div>
-          <h3>Project Lead Developer <span class="wp-org">· Xcontrol GmbH</span></h3>
-          <ul>
-            <li>Owned end-to-end delivery of SaaS features for maritime clients, from customer requirements sessions
-              through design, build, and production rollout across Angular frontend and Spring Boot backend.</li>
-            <li>Raised the bar on UI quality by building reusable, accessible component libraries that cut delivery
-              time for new client dashboards by standardising patterns across the engineering team.</li>
-            <li>Partnered with product, operations, and client stakeholders to shape roadmap priorities, ensuring
-              engineering effort tracked directly to customer impact rather than internal assumptions.</li>
-          </ul>
-          <div class="wp-tags mono">
-            <span>ANGULAR</span><span>SPRING BOOT</span><span>POSTGRESQL</span><span>REST APIS</span><span>DOCKER</span>
+          <p class="drag-hint mono">Drag · scroll
+            <svg width="40" height="10" viewBox="0 0 40 10" aria-hidden="true"><path d="M0 5H38M33 1L38 5L33 9" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--signal)" /></svg>
+          </p>
+        </div>
+
+        <div class="voyage-scroller">
+          <div class="voyage-track" id="voyage-track">
+            <div class="voyage-route" aria-hidden="true"></div>
+
+            <article class="wp current" data-wp="WP-05">
+              <span class="wp-year mono">2025 → now</span>
+              <span class="wp-fix" aria-hidden="true"></span>
+              <div class="wp-card">
+                <div class="wp-top mono">
+                  <span>WP-05 · Hamburg · 53.55°N 9.99°E</span>
+                  <span class="wp-date"><span class="wp-now">Underway</span>Mar 2025 → present</span>
+                </div>
+                <h3>Applied AI Engineer<span class="wp-org">Xcontrol GmbH</span></h3>
+                <ul>
+                  <li>Multi-agent orchestration with LangGraph and MCP. Agents self-select tools, delegate subtasks and recover from failures without a human in the loop.</li>
+                  <li>Discovery sessions with cruise line operators before a line of code. Real operational pain becomes specs the team builds against.</li>
+                  <li>End-to-end ownership of AI deployments aboard vessels: infrastructure, onboarding ship IT, runbooks, and being reachable when it breaks mid-ocean.</li>
+                  <li>Took the initiative to move xtv-platform's cabin-TV apps from DOM to Lightning Blits (WebGL): proving prototype, shared widget kit, a steady 60 fps on real panels.</li>
+                </ul>
+                <ul class="tags mono"><li>LangGraph</li><li>MCP</li><li>RAG</li><li>Qdrant</li><li>Redis Streams</li><li>Kubernetes</li><li>JWT · OIDC</li></ul>
+              </div>
+            </article>
+
+            <article class="wp" data-wp="WP-04">
+              <span class="wp-year mono">2021 → 2025</span>
+              <span class="wp-fix" aria-hidden="true"></span>
+              <div class="wp-card">
+                <div class="wp-top mono">
+                  <span>WP-04 · Hamburg · 53.55°N 9.99°E</span>
+                  <span class="wp-date">Aug 2021 → Sep 2025</span>
+                </div>
+                <h3>Project Lead Developer<span class="wp-org">Xcontrol GmbH</span></h3>
+                <ul>
+                  <li>Owned SaaS delivery for maritime clients end to end, from requirements sessions through Angular frontend and Spring Boot backend to production rollout.</li>
+                  <li>Built reusable, accessible component libraries that cut delivery time for new client dashboards by standardising patterns across the team.</li>
+                  <li>Shaped roadmap priorities with product, operations and client stakeholders so engineering effort tracked customer impact, not internal assumptions.</li>
+                </ul>
+                <ul class="tags mono"><li>Angular</li><li>Spring Boot</li><li>PostgreSQL</li><li>REST APIs</li><li>Docker</li></ul>
+              </div>
+            </article>
+
+            <article class="wp" data-wp="WP-03">
+              <span class="wp-year mono">2020 → 2021</span>
+              <span class="wp-fix" aria-hidden="true"></span>
+              <div class="wp-card">
+                <div class="wp-top mono">
+                  <span>WP-03 · Hyderabad · 17.39°N 78.49°E</span>
+                  <span class="wp-date">Dec 2020 → Jun 2021</span>
+                </div>
+                <h3>Lead Software Engineer<span class="wp-org">Aureus Tech Systems · Swiss Re</span></h3>
+                <ul>
+                  <li>ERP system for Swiss Re with KPIs and analytics on policies, claims and renewals.</li>
+                  <li>Spring Boot APIs and a highly interactive Angular + Highcharts frontend.</li>
+                  <li>Business discussions, product roadmap, UX reviews and system-design meetings alongside the build.</li>
+                </ul>
+                <ul class="tags mono"><li>Spring Boot</li><li>Angular</li><li>Highcharts.js</li><li>Azure DevOps</li></ul>
+              </div>
+            </article>
+
+            <article class="wp" data-wp="WP-02">
+              <span class="wp-year mono">2016 → 2020</span>
+              <span class="wp-fix" aria-hidden="true"></span>
+              <div class="wp-card">
+                <div class="wp-top mono">
+                  <span>WP-02 · Hyderabad · 17.39°N 78.49°E</span>
+                  <span class="wp-date">May 2016 → Dec 2020</span>
+                </div>
+                <h3>Software Engineer<span class="wp-org">ValueLabs</span></h3>
+                <ul>
+                  <li>MEAN-stack product development in a service-oriented architecture, Agile end to end.</li>
+                  <li>Built the SSO framework with JWT, the core shared Angular modules and the REST APIs in Node.js other teams shipped on.</li>
+                  <li>API documentation in Confluence; led scrum ceremonies and agile process.</li>
+                </ul>
+                <ul class="tags mono"><li>Angular</li><li>Node.js</li><li>MongoDB</li><li>JWT</li><li>SSO</li></ul>
+              </div>
+            </article>
+
+            <article class="wp" data-wp="WP-01">
+              <span class="wp-year mono">2015 → 2016 · departure</span>
+              <span class="wp-fix" aria-hidden="true"></span>
+              <div class="wp-card">
+                <div class="wp-top mono">
+                  <span>WP-01 · Hyderabad · 17.39°N 78.49°E</span>
+                  <span class="wp-date">Jun 2015 → Apr 2016</span>
+                </div>
+                <h3>Trainee Software Engineer<span class="wp-org">ValueLabs</span></h3>
+                <ul>
+                  <li>Started as a fresher and learned the fundamentals the right way: pairing with seniors, real production code, shipping behind feature flags.</li>
+                  <li>Java, Spring and MySQL on the backend, JavaScript and jQuery in front. Code review, testing and clean delivery from day one.</li>
+                  <li>Ask why before how. Treat every requirement as a hypothesis to validate, not a spec to blindly implement.</li>
+                </ul>
+                <ul class="tags mono"><li>Java</li><li>Spring</li><li>MySQL</li><li>JavaScript</li><li>jQuery</li><li>SDLC</li></ul>
+              </div>
+            </article>
           </div>
         </div>
-      </article>
 
-      <article class="waypoint">
-        <div class="wp-marker" aria-hidden="true"><span class="wp-fix"></span></div>
-        <div class="wp-card">
-          <div class="wp-top mono">
-            <span class="wp-id">WP-03 · HYDERABAD · 17.39°N 78.49°E</span>
-            <span class="wp-date">DEC 2020 - JUN 2021</span>
-          </div>
-          <h3>Lead Software Engineer <span class="wp-org">· Aureus Tech Systems (Swiss Re)</span></h3>
-          <ul>
-            <li>Developed ERP system for Swiss Re incorporating KPIs and analytics on policies, claims, and renewals.</li>
-            <li>Built APIs in Spring Boot and highly interactive frontend in Angular + Highcharts.js.</li>
-            <li>Participated in business discussions, product roadmap, UX/UI reviews, and system design meetings.</li>
-          </ul>
-          <div class="wp-tags mono">
-            <span>SPRING BOOT</span><span>ANGULAR</span><span>HIGHCHARTS.JS</span><span>AZURE DEVOPS</span>
-          </div>
+        <div class="voyage-foot mono">
+          <div class="voyage-progress"><b id="voyage-current">WP-05</b><span class="bar"><span></span><i></i></span><span>WP-01 · departure</span></div>
+          <span>5 waypoints · 2015 → 2026</span>
         </div>
-      </article>
+      </div>
+    </section>
 
-      <article class="waypoint">
-        <div class="wp-marker" aria-hidden="true"><span class="wp-fix"></span></div>
-        <div class="wp-card">
-          <div class="wp-top mono">
-            <span class="wp-id">WP-02 · HYDERABAD · 17.39°N 78.49°E</span>
-            <span class="wp-date">MAY 2016 - DEC 2020</span>
-          </div>
-          <h3>Software Engineer <span class="wp-org">· ValueLabs</span></h3>
-          <ul>
-            <li>MEAN stack product development in Service Oriented Architecture using Agile methodology.</li>
-            <li>Developed SSO framework with JWT, core shared Angular modules, and REST APIs in Node.js.</li>
-            <li>Wrote API documentation in Confluence; led scrum ceremonies and agile process management.</li>
-          </ul>
-          <div class="wp-tags mono">
-            <span>ANGULAR</span><span>NODE.JS</span><span>MONGODB</span><span>JWT</span><span>SSO</span>
-          </div>
+    <!-- LOG 04 · PORTS OF CALL -->
+    <section class="log" id="log-ports">
+      <span class="ghost" aria-hidden="true">04</span>
+      <p class="log-head mono">Log 04 · Ports of call</p>
+      <h2 class="log-title">THREE DOMAINS SHIPPED. <span class="serif">The problem changes, the method doesn't.</span></h2>
+
+      <div class="ports-grid">
+        <div class="ports-route" aria-hidden="true"><span class="solid"></span><span class="dashed"></span></div>
+
+        <article class="port">
+          <span class="port-fix" aria-hidden="true"></span>
+          <p class="port-where mono">Hyderabad · 17.39°N · 2015 → 2020</p>
+          <h3>E-COMMERCE</h3>
+          <p class="port-org">ValueLabs</p>
+          <p class="port-desc">MEAN-stack product platforms in a service-oriented architecture. Built the SSO framework, the shared Angular modules and the REST layer other teams shipped on.</p>
+          <ul class="tags mono"><li>SOA</li><li>JWT SSO</li><li>Node</li><li>Angular</li></ul>
+        </article>
+
+        <article class="port">
+          <span class="port-fix" aria-hidden="true"></span>
+          <p class="port-where mono">Hyderabad · 17.39°N · 2020 → 2021</p>
+          <h3>INSURANCE</h3>
+          <p class="port-org">Swiss Re, via Aureus</p>
+          <p class="port-desc">Reinsurance ERP with KPIs and analytics across policies, claims and renewals. Regulated data, audit trails, and a seat in roadmap and system-design reviews.</p>
+          <ul class="tags mono"><li>Analytics</li><li>Spring Boot</li><li>Highcharts</li></ul>
+        </article>
+
+        <article class="port current">
+          <span class="port-fix" aria-hidden="true"></span>
+          <p class="port-where mono">Hamburg · 53.55°N · 2021 → now</p>
+          <h3>MARITIME</h3>
+          <p class="port-org">Xcontrol GmbH</p>
+          <p class="port-desc">Guest experience technology for cruise lines: cabin TV, in-room services, then multi-agent AI that runs aboard vessels. Multi-tenant, onboarded by ship IT crews who are also the chef's assistant.</p>
+          <ul class="tags mono"><li>LangGraph</li><li>MCP</li><li>Multi-tenant</li><li>Lightning Blits</li></ul>
+        </article>
+
+        <aside class="cargo">
+          <p class="cargo-head mono"><span>Cargo</span><span>What travels between ports</span></p>
+          <ol>
+            <li><span>01</span><span>Discovery with the people who will run it, before the first line of code.</span></li>
+            <li><span>02</span><span>The constraint is the spec: latency, connectivity, tenancy, regulation.</span></li>
+            <li><span>03</span><span>Observable, explainable, resilient by default. Flakiness is a blocker.</span></li>
+            <li><span>04</span><span>Ship small, behind flags. Measure inside the operator's workflow, not the demo.</span></li>
+            <li><span>05</span><span>Stay for what breaks. Runbooks, onboarding, and a phone that rings mid-ocean.</span></li>
+          </ol>
+          <p class="cargo-tail serif">Same cargo, every port.</p>
+        </aside>
+      </div>
+
+      <div class="ports-foot mono">
+        <span class="next"><i aria-hidden="true"></i>Next port · <span class="signal-text">open</span></span>
+        <a href="#log-contact">Open a channel →</a>
+      </div>
+    </section>
+
+    <!-- LOGBOOK · PARIS -->
+    <section class="logbook" id="logbook" aria-label="Logbook entry, Paris">
+      <div class="lb-chart" aria-hidden="true">
+        <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid meet">
+          <path d="M520,90 C470,270 370,420 210,540" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="7 7" style="color:var(--signal);opacity:.6" />
+          <circle cx="520" cy="90" r="5" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--signal);opacity:.8" />
+          <circle cx="210" cy="540" r="6" fill="currentColor" style="color:var(--signal)" />
+          <circle cx="210" cy="540" r="18" fill="none" stroke="currentColor" stroke-width="1" style="color:var(--signal);opacity:.5" />
+          <circle cx="210" cy="540" r="34" fill="none" stroke="currentColor" stroke-width="1" style="color:var(--signal);opacity:.2" />
+          <line x1="210" y1="470" x2="210" y2="610" stroke="currentColor" style="color:var(--line-strong)" /><line x1="140" y1="540" x2="280" y2="540" stroke="currentColor" style="color:var(--line-strong)" />
+          <text x="536" y="76">HAM · 53.55°N</text>
+          <text x="254" y="566" class="sig">PAR · 48.86°N 2.35°E</text>
+          <text x="410" y="330">DIST 476 NM</text>
+        </svg>
+      </div>
+      <p class="log-head mono">Logbook · Paris</p>
+      <blockquote class="lb-quote">
+        <p class="lb-1 words">AGENTS CAN BE AI.<br /><span class="serif">Agency is human.</span></p>
+        <p class="lb-sub">It is on each of us to strengthen our own agency, with tools in hand.</p>
+      </blockquote>
+      <blockquote class="lb-quote">
+        <p class="lb-2 words">DEVELOPERS BUILD THE ROADS.<br /><span class="dim">EXPERTS TEACH THE AGENTS</span> <span class="serif">how to drive.</span></p>
+      </blockquote>
+      <p class="lb-cite mono"><i aria-hidden="true"></i>Heard on a slide · Paris · VivaTech side event · June 2026</p>
+    </section>
+
+    <!-- LOG 05 · STACK -->
+    <section class="log" id="log-stack">
+      <p class="log-head mono">Log 05 · Instruments &amp; cargo</p>
+      <h2 class="log-title">WHAT I <span class="serif">build with.</span></h2>
+      <div class="stack-grid">
+        <div class="stack-group">
+          <h3 class="mono"><span class="stack-code">AGT</span>Agentic AI</h3>
+          <ul class="stack-tags mono"><li>LangGraph</li><li>MCP</li><li>RAG</li><li>ReAct</li><li>Plan-and-Execute</li><li>LangChain</li><li>LLM Routing</li><li>Agentic Orchestration</li><li>Tool Calling</li></ul>
         </div>
-      </article>
-
-      <article class="waypoint">
-        <div class="wp-marker" aria-hidden="true"><span class="wp-fix"></span></div>
-        <div class="wp-card">
-          <div class="wp-top mono">
-            <span class="wp-id">WP-01 · HYDERABAD · 17.39°N 78.49°E · DEPARTURE</span>
-            <span class="wp-date">JUN 2015 - APR 2016</span>
-          </div>
-          <h3>Trainee Software Engineer <span class="wp-org">· ValueLabs</span></h3>
-          <ul>
-            <li>Started my professional career as a fresher and learned software fundamentals and SDLC the right way:
-              pairing with seniors, writing real production code, and shipping behind feature flags.</li>
-            <li>Built foundational backend skills in Java, Spring, and MySQL alongside frontend work in JavaScript and
-              jQuery, picking up the habits of code review, testing, and clean delivery early.</li>
-            <li>Established the customer-first instinct that still drives me: ask why before how, and treat every
-              requirement as a hypothesis to validate, not a spec to blindly implement.</li>
-          </ul>
-          <div class="wp-tags mono">
-            <span>JAVA</span><span>SPRING</span><span>MYSQL</span><span>JAVASCRIPT</span><span>JQUERY</span><span>SDLC</span>
-          </div>
+        <div class="stack-group">
+          <h3 class="mono"><span class="stack-code">ML</span>AI / ML</h3>
+          <ul class="stack-tags mono"><li>TensorFlow</li><li>Deep Learning</li><li>OpenCV</li><li>MediaPipe</li><li>Qdrant</li><li>Vector Search</li><li>Embedding Models</li><li>Knowledge Graphs</li></ul>
         </div>
-      </article>
+        <div class="stack-group">
+          <h3 class="mono"><span class="stack-code">BE</span>Backend</h3>
+          <ul class="stack-tags mono"><li>Spring Boot</li><li>Node.js</li><li>NestJS</li><li>Java</li><li>Python</li><li>PostgreSQL</li><li>Redis</li><li>Redis Streams</li><li>MySQL</li><li>REST APIs</li></ul>
+        </div>
+        <div class="stack-group">
+          <h3 class="mono"><span class="stack-code">FE</span>Frontend</h3>
+          <ul class="stack-tags mono"><li>Angular</li><li>TypeScript</li><li>JavaScript</li><li>RxJS</li><li>Lightning Blits</li><li>Highcharts.js</li><li>HTML/CSS</li></ul>
+        </div>
+        <div class="stack-group">
+          <h3 class="mono"><span class="stack-code">OPS</span>DevOps &amp; infra</h3>
+          <ul class="stack-tags mono"><li>Docker</li><li>Kubernetes</li><li>Docker Compose</li><li>K8s Operators</li><li>Azure</li><li>CI/CD</li></ul>
+        </div>
+        <div class="stack-group">
+          <h3 class="mono"><span class="stack-code">SEC</span>Architecture &amp; security</h3>
+          <ul class="stack-tags mono"><li>Microservices</li><li>SOA</li><li>JWT</li><li>OIDC</li><li>SSO</li><li>Multi-tenant</li><li>System Design</li><li>Event-driven</li></ul>
+        </div>
+        <div class="stack-group stack-wide">
+          <h3 class="mono"><span class="stack-code">DOM</span>Domain</h3>
+          <ul class="stack-tags mono"><li>Maritime SaaS</li><li>Cruise Guest Experience</li><li>Reinsurance Analytics</li><li>E-commerce Platforms</li><li>Requirements Engineering</li><li>Customer Discovery</li><li>Technical Onboarding</li><li>Stakeholder Management</li><li>Product Roadmap</li></ul>
+        </div>
+      </div>
+    </section>
 
+    <!-- LOG 06 · DISPATCHES -->
+    <section class="log" id="log-dispatches">
+      <div class="dispatch-head">
+        <div>
+          <p class="log-head mono">Log 06 · Dispatches</p>
+          <h2 class="log-title">NOTES FROM THE <span class="serif">engine room.</span></h2>
+        </div>
+        <p class="dispatch-count mono">07 dispatches · 2025 → 2026</p>
+      </div>
+      <ol class="dlist">
+        <li><a class="drow" href="blog/at-sea.html" data-img="assets/og/at-sea.png" data-cursor="READ" data-cursor-fill>
+          <span class="d-idx mono">01</span><span class="d-title">AI Systems That Run at Sea</span><span class="d-cat mono">Maritime AI</span><span class="d-time mono">5 min</span>
+          <svg class="d-arrow" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 18L18 4M8 4H18V14" /></svg></a></li>
+        <li><a class="drow" href="blog/xtv-blits.html" data-img="assets/og/xtv-blits.png" data-cursor="READ" data-cursor-fill>
+          <span class="d-idx mono">02</span><span class="d-title">Sixty Frames on a Cabin TV</span><span class="d-cat mono">TV platform</span><span class="d-time mono">6 min</span>
+          <svg class="d-arrow" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 18L18 4M8 4H18V14" /></svg></a></li>
+        <li><a class="drow" href="blog/building-tv-mcp.html" data-img="assets/og/building-tv-mcp.png" data-cursor="READ" data-cursor-fill>
+          <span class="d-idx mono">03</span><span class="d-title">Teaching an AI Agent to Hold the Remote</span><span class="d-cat mono">Developer tools</span><span class="d-time mono">8 min</span>
+          <svg class="d-arrow" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 18L18 4M8 4H18V14" /></svg></a></li>
+        <li><a class="drow" href="blog/cabin-baby-monitor.html" data-img="assets/og/cabin-baby-monitor.png" data-cursor="READ" data-cursor-fill>
+          <span class="d-idx mono">04</span><span class="d-title">A Baby Monitor for Cruise Cabins</span><span class="d-cat mono">System design</span><span class="d-time mono">7 min</span>
+          <svg class="d-arrow" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 18L18 4M8 4H18V14" /></svg></a></li>
+        <li><a class="drow" href="blog/customer-discovery.html" data-img="assets/og/customer-discovery.png" data-cursor="READ" data-cursor-fill>
+          <span class="d-idx mono">05</span><span class="d-title">Why AI Engineers Must Talk to Customers</span><span class="d-cat mono">Product engineering</span><span class="d-time mono">4 min</span>
+          <svg class="d-arrow" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 18L18 4M8 4H18V14" /></svg></a></li>
+        <li><a class="drow" href="blog/journey.html" data-img="assets/og/journey.png" data-cursor="READ" data-cursor-fill>
+          <span class="d-idx mono">06</span><span class="d-title">From Full-Stack to Agentic AI</span><span class="d-cat mono">Career</span><span class="d-time mono">6 min</span>
+          <svg class="d-arrow" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 18L18 4M8 4H18V14" /></svg></a></li>
+        <li><a class="drow" href="blog/recommendations.html" data-img="assets/og/recommendations.png" data-cursor="READ" data-cursor-fill>
+          <span class="d-idx mono">07</span><span class="d-title">What Colleagues Say</span><span class="d-cat mono">Recommendations</span><span class="d-time mono">3 min</span>
+          <svg class="d-arrow" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 18L18 4M8 4H18V14" /></svg></a></li>
+      </ol>
+    </section>
+
+    <!-- LOG 07 · CERTIFICATIONS -->
+    <section class="log" id="log-certs">
+      <p class="log-head mono">Log 07 · Certifications</p>
+      <div class="certs mono">
+        <div class="cert"><span>AI in Healthcare</span><span class="cert-src">Udacity · Oct 2022</span></div>
+        <div class="cert"><span>Artificial Intelligence</span><span class="cert-src">TechLabs Hamburg · Sep 2022</span></div>
+        <div class="cert"><span>Entrepreneurship: Bridge Your Idea</span><span class="cert-src">Startup Bridge · Aug 2022</span></div>
+        <div class="cert"><span>AI &amp; Machine Learning</span><span class="cert-src">IIIT Hyderabad · Sep 2019</span></div>
+      </div>
+    </section>
+
+    <!-- LOG 08 · CONTACT -->
+    <section class="log contact" id="log-contact">
+      <p class="log-head mono">Log 08 · Open a channel</p>
+      <div class="contact-grid">
+        <h2 class="contact-title">GOT A HARD<br />PROBLEM<br /><span class="serif">worth shipping?</span></h2>
+        <a class="magnet mono" href="#log-contact" data-mail data-cursor="MAIL" aria-label="Send me an email">
+          <span>Send mail</span>
+          <svg viewBox="0 0 26 26" aria-hidden="true"><path d="M5 21L21 5M9 5H21V17" /></svg>
+        </a>
+      </div>
+      <div class="contact-bottom">
+        <p class="contact-sub">Open to conversations about agentic AI, maritime tech, SaaS product engineering, or <span class="serif">a hard problem you can't put down.</span> I reply within 48 hours.</p>
+        <ul class="channels mono">
+          <li><a href="https://linkedin.com/in/skdonthi" target="_blank" rel="noopener"><small>LinkedIn</small>/in/skdonthi ↗</a></li>
+          <li><a href="https://github.com/skdonthi" target="_blank" rel="noopener"><small>GitHub</small>/skdonthi ↗</a></li>
+          <li class="ch-mail"><a href="#log-contact" data-mail><small>Email</small>Open a channel ↗</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span class="foot-word" aria-hidden="true">DONTHI.DEV</span>
+    <div class="foot-row mono">
+      <span>© 2026 · Shiva Krishna Donthi</span>
+      <span>HAM <span data-clock>--:--:--</span> · 53.55°N 9.99°E</span>
+      <span>Built by hand · no template</span>
+      <a href="#top">↑ Back to top</a>
     </div>
-  </section>
-
-  <!-- LOG 04 · STACK -->
-  <section class="log" id="log-stack">
-    <div class="log-head mono">LOG 04 · INSTRUMENTS & CARGO</div>
-    <h2 class="log-title">WHAT I BUILD WITH.</h2>
-    <div class="stack-grid">
-      <div class="stack-group">
-        <h3 class="mono"><span class="stack-code">AGT</span> AGENTIC AI</h3>
-        <div class="stack-tags mono">
-          <span>LangGraph</span><span>MCP</span><span>RAG</span><span>ReAct</span><span>Plan-and-Execute</span>
-          <span>LangChain</span><span>LLM Routing</span><span>Agentic Orchestration</span><span>Tool Calling</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <h3 class="mono"><span class="stack-code">ML</span> AI / ML</h3>
-        <div class="stack-tags mono">
-          <span>TensorFlow</span><span>Deep Learning</span><span>OpenCV</span><span>MediaPipe</span><span>Qdrant</span>
-          <span>Vector Search</span><span>Embedding Models</span><span>Knowledge Graphs</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <h3 class="mono"><span class="stack-code">BE</span> BACKEND</h3>
-        <div class="stack-tags mono">
-          <span>Spring Boot</span><span>Node.js</span><span>Java</span><span>Python</span><span>PostgreSQL</span>
-          <span>Redis</span><span>Redis Streams</span><span>MySQL</span><span>REST APIs</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <h3 class="mono"><span class="stack-code">FE</span> FRONTEND</h3>
-        <div class="stack-tags mono">
-          <span>Angular</span><span>TypeScript</span><span>JavaScript</span><span>RxJS</span>
-          <span>Highcharts.js</span><span>HTML/CSS</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <h3 class="mono"><span class="stack-code">OPS</span> DEVOPS & INFRA</h3>
-        <div class="stack-tags mono">
-          <span>Docker</span><span>Kubernetes</span><span>Docker Compose</span><span>K8s Operators</span>
-          <span>Azure</span><span>CI/CD</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <h3 class="mono"><span class="stack-code">SEC</span> ARCHITECTURE & SECURITY</h3>
-        <div class="stack-tags mono">
-          <span>Microservices</span><span>SOA</span><span>JWT</span><span>OIDC</span><span>SSO</span>
-          <span>Multi-tenant</span><span>System Design</span><span>Offline-First</span>
-        </div>
-      </div>
-      <div class="stack-group stack-wide">
-        <h3 class="mono"><span class="stack-code">DOM</span> DOMAIN</h3>
-        <div class="stack-tags mono">
-          <span>Maritime SaaS</span><span>Cruise Tech</span><span>Requirements Engineering</span>
-          <span>Customer Discovery</span><span>Technical Onboarding</span><span>Stakeholder Management</span>
-          <span>Product Roadmap</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOG 05 · DISPATCHES -->
-  <section class="log" id="log-dispatches">
-    <div class="log-head mono">LOG 05 · DISPATCHES</div>
-    <h2 class="log-title">NOTES FROM THE ENGINE ROOM.</h2>
-    <div class="dispatches">
-      <a class="dispatch featured" href="blog/at-sea.html">
-        <div class="d-meta mono"><span>MARITIME AI</span><span>5 MIN</span></div>
-        <h3>AI Systems That Run at Sea</h3>
-        <p>Deploying LLM pipelines aboard cruise ships taught me things no cloud architecture blog ever will.
-          Connectivity is a lie. Latency is religion. And your IT team is probably also the chef's assistant.</p>
-        <span class="d-link mono">READ →</span>
-      </a>
-      <a class="dispatch" href="blog/xtv-blits.html">
-        <div class="d-meta mono"><span>TV PLATFORM</span><span>6 MIN</span></div>
-        <h3>Sixty Frames on a Cabin TV</h3>
-        <p>Nobody put the Lightning Blits migration on the roadmap, so I built the prototype that did. The widget
-          kit, the strangler rollout, and the on-device numbers that ended the framework debate.</p>
-        <span class="d-link mono">READ →</span>
-      </a>
-      <a class="dispatch" href="blog/building-tv-mcp.html">
-        <div class="d-meta mono"><span>DEVELOPER TOOLS</span><span>8 MIN</span></div>
-        <h3>Teaching an AI Agent to Hold the Remote</h3>
-        <p>Building tv-mcp, an open-source MCP server that lets AI agents build, deploy, and debug web apps on
-          Samsung and LG TVs — and the three bugs a real hospitality panel found in one afternoon.</p>
-        <span class="d-link mono">READ →</span>
-      </a>
-      <a class="dispatch" href="blog/cabin-baby-monitor.html">
-        <div class="d-meta mono"><span>SYSTEM DESIGN</span><span>7 MIN</span></div>
-        <h3>A Baby Monitor for Cruise Cabins</h3>
-        <p>Streaming live baby-monitor video to parents across a ship's WLAN, with no internet. WebRTC, an edge SFU,
-          audio cry-detection, and the offline constraint that reshapes everything.</p>
-        <span class="d-link mono">READ →</span>
-      </a>
-      <a class="dispatch" href="blog/customer-discovery.html">
-        <div class="d-meta mono"><span>PRODUCT ENGINEERING</span><span>4 MIN</span></div>
-        <h3>Why AI Engineers Must Talk to Customers</h3>
-        <p>The requirements you think you have are rarely the ones you need. A framework for running discovery
-          sessions that actually change what you build.</p>
-        <span class="d-link mono">READ →</span>
-      </a>
-      <a class="dispatch" href="blog/journey.html">
-        <div class="d-meta mono"><span>CAREER</span><span>6 MIN</span></div>
-        <h3>From Full-Stack to Agentic AI: My Journey</h3>
-        <p>10 years of Angular, Spring Boot, and Node.js gave me a foundation. LangGraph, MCP, and a cruise ship gave
-          me a mission. Here's how the transition happened.</p>
-        <span class="d-link mono">READ →</span>
-      </a>
-      <a class="dispatch" href="blog/recommendations.html">
-        <div class="d-meta mono"><span>RECOMMENDATIONS</span><span>3 MIN</span></div>
-        <h3>What Colleagues Say</h3>
-        <p>Testimonials from Shivkumar Iyer and Vasu Thammaiah (Xcontrol) and Kishore Geekuru (ValueLabs) on technical
-          depth, architecture, delivery, and growth.</p>
-        <span class="d-link mono">READ →</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- LOG 06 · CERTIFICATIONS -->
-  <section class="log" id="log-certs">
-    <div class="log-head mono">LOG 06 · CERTIFICATIONS</div>
-    <div class="certs mono">
-      <div class="cert"><span>AI IN HEALTHCARE</span><span class="cert-src">UDACITY · OCT 2022</span></div>
-      <div class="cert"><span>ARTIFICIAL INTELLIGENCE</span><span class="cert-src">TECHLABS HAMBURG · SEP 2022</span></div>
-      <div class="cert"><span>ENTREPRENEURSHIP: BRIDGE YOUR IDEA</span><span class="cert-src">STARTUP BRIDGE · AUG 2022</span></div>
-      <div class="cert"><span>AI &amp; MACHINE LEARNING</span><span class="cert-src">IIIT HYDERABAD · SEP 2019</span></div>
-    </div>
-  </section>
-
-  <!-- LOG 07 · CONTACT -->
-  <section class="log contact" id="log-contact">
-    <div class="log-head mono">LOG 07 · OPEN A CHANNEL</div>
-    <h2 class="contact-title">GOT A HARD PROBLEM<br /><em>WORTH SHIPPING?</em></h2>
-    <p class="contact-sub">Open to conversations about agentic AI, maritime tech, SaaS product engineering, or just
-      interesting problems. I reply within 48 hours.</p>
-    <a class="contact-mail" id="contact-mail" href="#contact">SEND ME AN EMAIL&nbsp;→</a>
-    <div class="contact-links mono">
-      <a href="https://linkedin.com/in/skdonthi" target="_blank" rel="noopener">LINKEDIN /IN/SKDONTHI ↗</a>
-      <a href="https://github.com/skdonthi" target="_blank" rel="noopener">GITHUB /SKDONTHI ↗</a>
-    </div>
-  </section>
-
-  <footer class="foot mono">
-    <span>© 2026 · SHIVA KRISHNA DONTHI</span>
   </footer>
 
+  <div class="trail" id="trail" aria-hidden="true"><img id="trail-img" alt="" /></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
   <script src="harbor.js"></script>
 </body>
 

@@ -174,7 +174,7 @@
 .arch svg { width: 100%; height: auto; display: block; }
 .arch svg text { font-family: var(--body); }
 .arch .bx { fill: var(--ink-2); stroke: var(--line-strong); stroke-width: 1; }
-.arch .vid { fill: rgba(62, 147, 168, 0.14); stroke: #3e93a8; stroke-width: 1.2; }
+.arch .vid { fill: rgba(61, 143, 209, 0.14); stroke: #3d8fd1; stroke-width: 1.2; }
 .arch .evt { fill: var(--signal-soft); stroke: var(--signal); stroke-width: 1.2; }
 .arch .t { fill: var(--foam); font-size: 14px; font-weight: 600; }
 .arch .s { fill: var(--mist); font-size: 12px; }

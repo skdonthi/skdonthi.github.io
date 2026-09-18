@@ -33,12 +33,12 @@ for name, url in FONT_URLS.items():
         urllib.request.urlretrieve(url, path)
 
 W, H = 1200, 630
-INK = (7, 18, 25)
-FOAM = (233, 241, 239)
-MIST = (127, 163, 173)
-MIST_DIM = (76, 107, 117)
-SIGNAL = (255, 92, 56)
-LINE = (94, 156, 171, 46)
+INK = (5, 13, 20)
+FOAM = (237, 243, 248)
+MIST = (135, 164, 191)
+MIST_DIM = (74, 100, 131)
+SIGNAL = (255, 107, 53)
+LINE = (96, 148, 192, 46)
 
 
 def display_font(size, weight=800):
@@ -89,11 +89,11 @@ def card(slug, eyebrow, title_lines, accent_line_idx=None):
 
     # brand
     brand_f = display_font(44, 800)
-    d.text((72, 56), "SK", font=brand_f, fill=FOAM)
-    sk_w = d.textlength("SK", font=brand_f)
-    d.text((72 + sk_w + 4, 56), "/", font=brand_f, fill=SIGNAL)
-    sl_w = d.textlength("/", font=brand_f)
-    d.text((72 + sk_w + 8 + sl_w, 56), "DONTHI", font=brand_f, fill=FOAM)
+    d.text((72, 56), "DONTHI", font=brand_f, fill=FOAM)
+    b_w = d.textlength("DONTHI", font=brand_f)
+    d.text((72 + b_w, 56), ".", font=brand_f, fill=SIGNAL)
+    dot_w = d.textlength(".", font=brand_f)
+    d.text((72 + b_w + dot_w, 56), "DEV", font=brand_f, fill=FOAM)
 
     # eyebrow with signal tick
     ey_f = mono_font(26)
@@ -110,7 +110,7 @@ def card(slug, eyebrow, title_lines, accent_line_idx=None):
 
     # footer
     f_f = mono_font(24)
-    d.text((72, H - 74), "SKDONTHI.GITHUB.IO", font=f_f, fill=MIST_DIM)
+    d.text((72, H - 74), "DONTHI.DEV", font=f_f, fill=MIST_DIM)
     d.text((W - 72 - d.textlength("53.55°N 9.99°E · HAM", font=f_f), H - 74),
            "53.55°N 9.99°E · HAM", font=f_f, fill=MIST_DIM)
 
@@ -119,7 +119,7 @@ def card(slug, eyebrow, title_lines, accent_line_idx=None):
     print(path, os.path.getsize(path) // 1024, "KB")
 
 
-card("default", "Applied AI Engineer · Hamburg",
+card("default", "Shiva Krishna Donthi · Applied AI Engineer · Hamburg",
      ["Discover. Design.", "Build. Ship."], accent_line_idx=1)
 card("xtv-blits", "Dispatch · TV Platform",
      ["Sixty frames", "on a cabin TV"])
