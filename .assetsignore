@@ -5,3 +5,5 @@
 .assetsignore
 tools
 README.md
+wrangler.jsonc
+worker.js

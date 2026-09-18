@@ -1411,3 +1411,44 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .wp-card { max-height: none; overflow: visible; }
   .drow, .d-title, .magnet { transition: none; }
 }
+
+/* ---------- 404 ---------- */
+.nf {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--bar-h) + 2rem) var(--pad) 4rem;
+  overflow: hidden;
+}
+
+.nf .chart { z-index: 0; }
+.nf > *:not(.chart) { position: relative; z-index: 1; }
+.nf-lost line, .nf-lost circle { fill: none; stroke: var(--signal); stroke-width: 1.5; }
+.nf-lost circle { opacity: 0.45; stroke-dasharray: 4 4; }
+
+.nf-num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: min(28vw, 40vh);
+  line-height: 0.86;
+  letter-spacing: -0.005em;
+  margin-left: -0.03em;
+}
+
+.nf-num .dot-mark { color: var(--signal); }
+
+.nf-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.75rem);
+  line-height: 0.95;
+  margin-top: 1.2rem;
+}
+
+.nf-title .serif { color: var(--signal); font-size: 1.05em; letter-spacing: -0.01em; }
+.nf-sub { color: var(--mist); max-width: 34rem; margin-top: 1.2rem; }
+.nf-links { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2.2rem; font-size: 0.7rem; }
+.nf-links a { text-decoration: none; color: var(--foam); border-bottom: 1px solid var(--signal); padding-bottom: 0.3rem; }
+.nf-links a:hover { color: var(--signal); }

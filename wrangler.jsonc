@@ -1,0 +1,15 @@
+{
+  // Cloudflare Worker serving this repo as static assets.
+  // Deployed by Workers Builds on every push to master.
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "donthi-dev",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

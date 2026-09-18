@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
+  <title>Off the chart · Shiva Krishna Donthi</title>
+  <meta name="description" content="This page is not on the chart." />
+  <meta name="theme-color" content="#050d14" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,700;10..72,800&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@1&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/harbor.css" />
+  <script>
+    (function () {
+      try {
+        var p = localStorage.getItem("skd-theme");
+        var d = (p === "light" || p === "dark") ? p
+          : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.dataset.theme = d;
+      } catch (e) { /* default dark */ }
+    })();
+  </script>
+</head>
+
+<body>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-ring"><span class="cursor-label" id="cursor-label"></span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar scrolled" id="topbar">
+    <a href="/" class="brand" data-cursor="HOME">DONTHI<span class="brand-dot">.</span>DEV</a>
+    <div class="ship-clock mono" aria-label="Hamburg local time" style="margin-left:auto">
+      <span class="clock-port">HAM</span><span data-clock>--:--:--</span>
+    </div>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme" data-cursor="THEME">AUTO</button>
+  </header>
+
+  <main class="nf" id="top">
+    <div class="chart" aria-hidden="true">
+      <svg class="chart-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+        <path class="contour" d="M-50,690 C200,630 380,750 620,680 S1050,590 1490,670" style="opacity:.5" />
+        <path class="contour" d="M-50,770 C240,710 420,820 680,760 S1100,680 1490,750" style="opacity:.38" />
+        <path class="contour" d="M-50,850 C280,800 460,890 740,840 S1150,770 1490,835" style="opacity:.26" />
+        <circle class="ring" cx="1130" cy="480" r="210" /><circle class="ring" cx="1130" cy="480" r="140" /><circle class="ring" cx="1130" cy="480" r="70" />
+        <path class="route dashed" pathLength="1" d="M120,830 L340,640 L560,700 L850,430" style="stroke-dashoffset:0" />
+        <g class="fixes" style="opacity:1">
+          <circle cx="120" cy="830" r="5" style="opacity:.75" /><circle cx="340" cy="640" r="5" style="opacity:.75" /><circle cx="560" cy="700" r="5" style="opacity:.75" />
+        </g>
+        <g class="nf-lost" transform="translate(850,430)">
+          <line x1="-14" y1="-14" x2="14" y2="14" /><line x1="-14" y1="14" x2="14" y2="-14" />
+          <circle r="26" />
+        </g>
+      </svg>
+      <span class="annot" style="top:22%;left:64%">LAST FIX · 53.55°N 9.99°E</span>
+      <span class="annot" style="top:46%;left:62%">POSITION UNKNOWN</span>
+      <span class="annot" style="top:70%;left:78%">NO SOUNDING</span>
+    </div>
+
+    <p class="log-head mono">Log · off the chart</p>
+    <p class="nf-num" aria-hidden="true">404<span class="dot-mark">.</span></p>
+    <h1 class="nf-title">NO FIX ON THIS <span class="serif">bearing.</span></h1>
+    <p class="nf-sub">This page isn't on the chart. It may have moved with the redesign, or the link was mistyped. The harbour is one click back.</p>
+    <div class="nf-links mono">
+      <a href="/" data-cursor="HOME">← Back to port</a>
+      <a href="/#log-dispatches" data-cursor="READ">Dispatches →</a>
+      <a href="/#log-contact" data-cursor="MAIL">Open a channel →</a>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <span class="foot-word" aria-hidden="true">DONTHI.DEV</span>
+    <div class="foot-row mono">
+      <span>© 2026 · Shiva Krishna Donthi</span>
+      <span>HAM <span data-clock>--:--:--</span> · 53.55°N 9.99°E</span>
+      <span>Built by hand · no template</span>
+      <a href="/">← Home</a>
+    </div>
+  </footer>
+
+  <script src="/harbor.js"></script>
+</body>
+
+</html>
