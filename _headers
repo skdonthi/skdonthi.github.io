@@ -1,4 +1,5 @@
 # Cloudflare Workers static assets headers. Personal site: no indexing, no AI training.
+# CSS/JS carry a version query string in the HTML; no long cache on them here.
 /*
   X-Robots-Tag: noindex, nofollow, noarchive, noimageindex, noai, noimageai
   X-Content-Type-Options: nosniff
@@ -8,13 +9,4 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 /assets/*
-  Cache-Control: public, max-age=86400
-
-/harbor.css
-  Cache-Control: public, max-age=3600
-
-/harbor-post.css
-  Cache-Control: public, max-age=3600
-
-/harbor.js
   Cache-Control: public, max-age=3600
