@@ -1452,3 +1452,84 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .nf-links { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2.2rem; font-size: 0.7rem; }
 .nf-links a { text-decoration: none; color: var(--foam); border-bottom: 1px solid var(--signal); padding-bottom: 0.3rem; }
 .nf-links a:hover { color: var(--signal); }
+
+/* ---------- crew profile pages (donthi.dev/<name>) ---------- */
+.crew-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--bar-h) + 2.5rem) var(--pad) 3.5rem;
+  overflow: hidden;
+}
+
+.crew-hero .chart { z-index: 0; }
+.crew-hero > *:not(.chart) { position: relative; z-index: 1; }
+
+.crew-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: min(19vw, 30vh);
+  line-height: 0.86;
+  letter-spacing: -0.005em;
+  margin-left: -0.03em;
+}
+
+.crew-name .serif { display: block; font-size: 0.42em; line-height: 1; letter-spacing: -0.01em; color: var(--signal); margin: 0.1em 0 0 0.06em; }
+
+.crew-role { margin-top: 1.8rem; max-width: 44rem; font-size: clamp(1.1rem, 1.7vw, 1.4rem); line-height: 1.5; color: var(--foam); }
+.crew-role .serif { color: var(--mist); font-size: 1.1em; }
+
+.crew-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) auto; gap: 3rem; align-items: end; margin-top: 2.6rem; }
+.crew-bio { color: var(--mist); max-width: 38rem; }
+.crew-grid .hero-meta { margin-top: 2rem; }
+
+.crew-rows { border-top: 1px solid var(--line-strong); }
+.crew-rows li {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.crew-rows .cr-when { font-size: 0.62rem; color: var(--dim); padding-top: 0.4rem; }
+.crew-rows li.current .cr-when { color: var(--signal); }
+.crew-rows .cr-role {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.crew-rows .cr-org { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 0.6em; line-height: 1.2; letter-spacing: 0; text-transform: none; color: var(--mist); margin-top: 0.45rem; }
+.crew-rows .cr-note { color: var(--mist); font-size: 0.95rem; line-height: 1.5; }
+
+.crew-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.crew-card { background: var(--ink); padding: 2rem 1.8rem; display: flex; flex-direction: column; gap: 0.8rem; }
+.crew-card .mono { font-size: 0.6rem; color: var(--dim); }
+.crew-card h3 { font-family: var(--display); font-weight: 800; font-size: 1.6rem; line-height: 1; text-transform: uppercase; letter-spacing: 0.01em; }
+.crew-card .cc-org { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--mist); }
+.crew-card p { color: var(--mist); font-size: 0.92rem; }
+
+.crew-award { margin-top: 2.5rem; display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1.5rem; border-top: 1px solid var(--line); padding-top: 1.4rem; }
+.crew-award .mono { color: var(--signal); font-size: 0.62rem; padding-top: 0.3rem; }
+.crew-award p { color: var(--mist); }
+.crew-award strong { color: var(--foam); font-weight: 500; }
+
+@media (max-width: 1100px) {
+  .crew-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .crew-name { font-size: min(21vw, 22vh); }
+  .crew-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .crew-rows li { grid-template-columns: 1fr; gap: 0.5rem; }
+  .crew-rows .cr-when { padding-top: 0; }
+  .crew-cards { grid-template-columns: 1fr; }
+  .crew-award { grid-template-columns: 1fr; gap: 0.5rem; }
+}

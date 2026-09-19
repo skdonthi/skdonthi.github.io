@@ -63,8 +63,9 @@
   var clocks = doc.querySelectorAll("[data-clock]");
   function tickClock() {
     if (!clocks.length) return;
-    var t = new Date().toLocaleTimeString("de-DE", { timeZone: "Europe/Berlin", hour12: false });
+    var now = new Date();
     clocks.forEach(function (el) {
+      var t = now.toLocaleTimeString("de-DE", { timeZone: el.dataset.tz || "Europe/Berlin", hour12: false });
       if (el.dataset.clock === "split") {
         el.innerHTML = t.slice(0, 5) + '<span class="sec">' + t.slice(5) + "</span>";
       } else {
@@ -444,9 +445,10 @@
      ------------------------------------------------------------ */
   var addr = ["skdonthi", "outlook.com"].join("@");
   doc.querySelectorAll("[data-mail]").forEach(function (el) {
+    var to = el.dataset.mailTo ? el.dataset.mailTo.split("|").join("@") : addr;
     el.addEventListener("click", function (e) {
       e.preventDefault();
-      window.location.href = "mailto:" + addr;
+      window.location.href = "mailto:" + to;
     });
   });
 

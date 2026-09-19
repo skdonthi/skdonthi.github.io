@@ -51,7 +51,7 @@ def mono_font(size):
     return ImageFont.truetype(os.path.join(FONTS, "plexmono.ttf"), size)
 
 
-def card(slug, eyebrow, title_lines, accent_line_idx=None):
+def card(slug, eyebrow, title_lines, accent_line_idx=None, coords="53.55°N 9.99°E · HAM"):
     img = Image.new("RGB", (W, H), INK)
     ov = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(ov)
@@ -111,8 +111,7 @@ def card(slug, eyebrow, title_lines, accent_line_idx=None):
     # footer
     f_f = mono_font(24)
     d.text((72, H - 74), "DONTHI.DEV", font=f_f, fill=MIST_DIM)
-    d.text((W - 72 - d.textlength("53.55°N 9.99°E · HAM", font=f_f), H - 74),
-           "53.55°N 9.99°E · HAM", font=f_f, fill=MIST_DIM)
+    d.text((W - 72 - d.textlength(coords, font=f_f), H - 74), coords, font=f_f, fill=MIST_DIM)
 
     path = os.path.join(OUT, f"{slug}.png")
     img.save(path, "PNG", optimize=True)
@@ -135,3 +134,7 @@ card("journey", "Dispatch · Career",
      ["From full-stack", "to agentic AI"])
 card("recommendations", "Dispatch · Recommendations",
      ["What colleagues", "say"])
+card("satheesh", "Crew · Hospitality · Colchester",
+     ["Satheesh Donthi", "Guest Services Manager"], coords="51.89°N 0.90°E · COL")
+card("manasa", "Crew · donthi.dev/manasa",
+     ["Manasa Donthi"], coords="DONTHI.DEV/MANASA")
